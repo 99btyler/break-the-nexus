@@ -8,4 +8,4 @@ Get this project set up locally
   * Use this guide: https://www.spigotmc.org/wiki/spigot-installation/
 ### Setting up
 * Clone this repository
-* Using a Java IDE, open (repository)/break-the-nexus
+* Using a Java IDE, open (repository)/BreakTheNexus
