@@ -23,6 +23,12 @@ public class CommandTeam implements CommandExecutor {
                     } else {
 
                         if (!(commandSender instanceof Player)) {
+                            commandSender.sendMessage("That command is only for players");
+                            break;
+                        }
+
+                        if (((Player)commandSender).getWorld().getName().equals(BreakTheNexus.getInstance().getMapGame().getWorld().getName())) {
+                            commandSender.sendMessage("You're already in the game");
                             break;
                         }
 
