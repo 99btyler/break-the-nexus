@@ -31,4 +31,8 @@ public class Team {
         return playerNames.contains(playerName);
     }
 
+    public final String getInfo() {
+        return name.toUpperCase() + ": " + playerNames.size() + " players";
+    }
+
 }

@@ -1,6 +1,7 @@
 package breakthenexus.game.details.commands;
 
 import breakthenexus.BreakTheNexus;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,7 @@ public class CommandTeam implements CommandExecutor {
             switch (args[0].toLowerCase()) {
 
                 case "join":
+
                     if (args.length != 2) {
                         commandSender.sendMessage("/team join [red|blue]");
                     } else {
@@ -39,9 +41,16 @@ public class CommandTeam implements CommandExecutor {
                         }
 
                     }
+
                     break;
 
                 case "view":
+
+                    commandSender.sendMessage("----");
+                    commandSender.sendMessage(BreakTheNexus.getInstance().getTeamRed().getInfo());
+                    commandSender.sendMessage(BreakTheNexus.getInstance().getTeamBlue().getInfo());
+                    commandSender.sendMessage("----");
+
                     break;
 
             }
