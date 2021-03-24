@@ -1,11 +1,10 @@
 package breakthenexus;
 
+import breakthenexus.game.Map;
 import breakthenexus.game.Team;
 import breakthenexus.game.details.commands.CommandTeam;
-import breakthenexus.game.Map;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
