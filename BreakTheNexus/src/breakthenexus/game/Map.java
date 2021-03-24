@@ -1,4 +1,4 @@
-package breakthenexus.map;
+package breakthenexus.game;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
