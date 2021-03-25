@@ -11,7 +11,6 @@ public class Map {
     public Map(String worldFolderName) {
 
         worldFolderPath = "worlds_BreakTheNexus/" + worldFolderName;
-
         new WorldCreator(worldFolderPath).createWorld();
 
     }
