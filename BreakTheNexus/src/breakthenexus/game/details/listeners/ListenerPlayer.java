@@ -28,12 +28,14 @@ public class ListenerPlayer implements Listener {
             return;
         }
 
-        if (entityDamageEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+        final Player player = (Player)entityDamageEvent.getEntity();
+
+        if (player.getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
 
             entityDamageEvent.setCancelled(true);
 
             if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                entityDamageEvent.getEntity().teleport(BreakTheNexus.getInstance().getPlaceToSpawn(entityDamageEvent.getEntity().getName()));
+                player.teleport(BreakTheNexus.getInstance().getPlaceToSpawn(player.getName()));
             }
 
         }
