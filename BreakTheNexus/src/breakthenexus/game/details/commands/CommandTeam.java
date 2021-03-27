@@ -1,6 +1,7 @@
 package breakthenexus.game.details.commands;
 
 import breakthenexus.BreakTheNexus;
+import breakthenexus.game.Team;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,7 @@ public class CommandTeam implements CommandExecutor {
                 case "join":
 
                     if (args.length != 2) {
-                        commandSender.sendMessage("/team join [red|blue]");
+                        commandSender.sendMessage("/team join [teamName]");
                     } else {
 
                         if (!(commandSender instanceof Player)) {
@@ -33,10 +34,10 @@ public class CommandTeam implements CommandExecutor {
                             break;
                         }
 
-                        if (args[1].equalsIgnoreCase("red")) {
-                            BreakTheNexus.getInstance().getTeamRed().join(commandSender.getName());
-                        } else if (args[1].equalsIgnoreCase("blue")) {
-                            BreakTheNexus.getInstance().getTeamBlue().join(commandSender.getName());
+                        for (Team team : BreakTheNexus.getInstance().getTeams()) {
+                            if (args[1].equalsIgnoreCase(team.getTeamName())) {
+                                team.join(commandSender.getName());
+                            }
                         }
 
                     }
@@ -46,8 +47,9 @@ public class CommandTeam implements CommandExecutor {
                 case "view":
 
                     commandSender.sendMessage("----");
-                    commandSender.sendMessage(BreakTheNexus.getInstance().getTeamRed().getInfo());
-                    commandSender.sendMessage(BreakTheNexus.getInstance().getTeamBlue().getInfo());
+                    for (Team team : BreakTheNexus.getInstance().getTeams()) {
+                        commandSender.sendMessage(team.getInfo());
+                    }
                     commandSender.sendMessage("----");
 
                     break;

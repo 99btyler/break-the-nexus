@@ -1,6 +1,7 @@
 package breakthenexus.game.details.listeners;
 
 import breakthenexus.BreakTheNexus;
+import breakthenexus.game.Team;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -51,14 +52,11 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent blockBreakEvent) {
 
-        if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamRed().getNexus().getLocation())) {
-            blockBreakEvent.setCancelled(true);
-            BreakTheNexus.getInstance().getTeamRed().getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked Red nexus!");
-        }
-
-        if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamBlue().getNexus().getLocation())) {
-            blockBreakEvent.setCancelled(true);
-            BreakTheNexus.getInstance().getTeamBlue().getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked Blue nexus!");
+        for (Team team : BreakTheNexus.getInstance().getTeams()) {
+            if (blockBreakEvent.getBlock().getLocation().equals(team.getNexus().getLocation())) {
+                blockBreakEvent.setCancelled(true);
+                team.getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
+            }
         }
 
     }

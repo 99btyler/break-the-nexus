@@ -7,6 +7,9 @@ import breakthenexus.game.details.listeners.ListenerPlayer;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BreakTheNexus extends JavaPlugin {
 
     private static BreakTheNexus instance;
@@ -14,8 +17,7 @@ public class BreakTheNexus extends JavaPlugin {
     private Map mapLobby;
     private Map mapGame;
 
-    private Team teamRed;
-    private Team teamBlue;
+    private List<Team> teams = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -25,8 +27,8 @@ public class BreakTheNexus extends JavaPlugin {
         mapLobby = new Map("The Lobby");
         mapGame = new Map("Roastal");
 
-        teamRed = new Team("Red");
-        teamBlue = new Team("Blue");
+        teams.add(new Team("Red"));
+        teams.add(new Team("Blue"));
 
         getCommand("team").setExecutor(new CommandTeam());
 
@@ -46,24 +48,27 @@ public class BreakTheNexus extends JavaPlugin {
         return mapGame;
     }
 
-    public final Team getTeamRed() {
-        return teamRed;
+    public final Team[] getTeams() {
+        return teams.toArray(new Team[0]);
     }
 
-    public final Team getTeamBlue() {
-        return teamBlue;
+    public final Team getTeam(String teamName) {
+        for (Team team : teams) {
+            if (team.getTeamName().equals(teamName)) {
+                return team;
+            }
+        }
+        return null;
     }
 
     public final Location getPlaceToSpawn(String playerName) {
 
-        if (teamRed.has(playerName)) {
-            return teamRed.getRandomSpawnpoint();
-        } else if (teamBlue.has(playerName)) {
-            return teamBlue.getRandomSpawnpoint();
+        final Team team = getTeam(playerName);
+
+        if (team != null) {
+            return team.getRandomSpawnpoint();
         } else {
-
             return mapLobby.getWorld().getSpawnLocation();
-
         }
 
     }
