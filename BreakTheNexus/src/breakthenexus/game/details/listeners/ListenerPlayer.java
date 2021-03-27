@@ -4,6 +4,7 @@ import breakthenexus.BreakTheNexus;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -47,6 +48,19 @@ public class ListenerPlayer implements Listener {
         if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
             foodLevelChangeEvent.setCancelled(true);
         }
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent blockBreakEvent) {
+
+        if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamRed().getNexus().getLocation())) {
+            blockBreakEvent.setCancelled(true);
+            BreakTheNexus.getInstance().getTeamRed().getNexus().damage();
+        } else if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamBlue().getNexus().getLocation())) {
+            blockBreakEvent.setCancelled(true);
+            BreakTheNexus.getInstance().getTeamBlue().getNexus().damage();
+        }
+
     }
 
 }

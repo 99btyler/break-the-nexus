@@ -17,6 +17,8 @@ public class Team {
     private final Location[] spawnpoints = new Location[3];
     private final Random random = new Random();
 
+    private final Nexus nexus;
+
     public Team(String name) {
 
         this.name = name;
@@ -31,6 +33,8 @@ public class Team {
             spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -90.0, 0.0f, 0.0f);
             spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -80.0, 0.0f, 0.0f);
         }
+
+        nexus = new Nexus(this.name);
 
     }
 
@@ -51,6 +55,10 @@ public class Team {
 
     public final Location getRandomSpawnpoint() {
         return spawnpoints[random.nextInt(spawnpoints.length - 0) + 0];
+    }
+
+    public final Nexus getNexus() {
+        return nexus;
     }
 
     public final String getInfo() {
