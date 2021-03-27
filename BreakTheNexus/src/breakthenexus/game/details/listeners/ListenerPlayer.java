@@ -55,7 +55,11 @@ public class ListenerPlayer implements Listener {
         for (Team team : BreakTheNexus.getInstance().getTeams()) {
             if (blockBreakEvent.getBlock().getLocation().equals(team.getNexus().getLocation())) {
                 blockBreakEvent.setCancelled(true);
-                team.getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
+                if (team.has(blockBreakEvent.getPlayer().getName())) {
+                    blockBreakEvent.getPlayer().sendMessage("Don't break your own nexus");
+                } else {
+                    team.getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
+                }
             }
         }
 
