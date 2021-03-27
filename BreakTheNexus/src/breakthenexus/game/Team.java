@@ -70,6 +70,18 @@ public class Team {
         return nexus;
     }
 
+    public final void end() {
+
+        for (int i = 0; i < spawnpoints.length; i++) {
+            spawnpoints[i] = BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation();
+        }
+
+        for (String playerName : playerNames) {
+            Bukkit.getPlayer(playerName).setHealth(0);
+        }
+
+    }
+
     public final String getInfo() {
         return teamName.toUpperCase() + ": " + playerNames.size() + " players";
     }

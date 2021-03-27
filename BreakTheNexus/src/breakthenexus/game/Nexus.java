@@ -22,11 +22,11 @@ public class Nexus {
         return location;
     }
 
-    public final void damage(String attackerMessage) {
+    public final boolean damage(String attackerMessage) {
 
         if (health <= 1) {
             location.getBlock().setType(Material.BEDROCK);
-            return;
+            return true; // Nexus has been destroyed
         }
 
         health -= 1;
@@ -34,6 +34,8 @@ public class Nexus {
         for (Player player : location.getWorld().getPlayers()) {
             player.sendMessage(attackerMessage + " (" + health + ")");
         }
+
+        return false;
 
     }
 
