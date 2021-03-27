@@ -63,13 +63,13 @@ public class BreakTheNexus extends JavaPlugin {
 
     public final Location getPlaceToSpawn(String playerName) {
 
-        final Team team = getTeam(playerName);
-
-        if (team != null) {
-            return team.getRandomSpawnpoint();
-        } else {
-            return mapLobby.getWorld().getSpawnLocation();
+        for (Team team : teams) {
+            if (team.has(playerName)) {
+                return team.getRandomSpawnpoint();
+            }
         }
+
+        return mapLobby.getWorld().getSpawnLocation();
 
     }
 
