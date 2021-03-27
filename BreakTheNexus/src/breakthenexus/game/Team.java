@@ -25,13 +25,13 @@ public class Team {
 
         // TODO: automatically load spawnpoints from file instead
         if (this.name.equals("Red")) {
-            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, 100.0, 180.0f, 0.0f);
-            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, 90.0, 180.0f, 0.0f);
-            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, 80.0, 180.0f, 0.0f);
+            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), -8.0, 20.0, 95.0, 180.0f, 0.0f);
+            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 8.0, 20.0, 95.0, 180.0f, 0.0f);
+            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, 87.0, 180.0f, 0.0f);
         } else if (this.name.equals("Blue")) {
-            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -100.0, 0.0f, 0.0f);
-            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -90.0, 0.0f, 0.0f);
-            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -80.0, 0.0f, 0.0f);
+            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 8.0, 20.0, -95.0, 0.0f, 0.0f);
+            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), -8.0, 20.0, -95.0, 0.0f, 0.0f);
+            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -87.0, 0.0f, 0.0f);
         }
 
         nexus = new Nexus(this.name);

@@ -32,13 +32,11 @@ public class ListenerPlayer implements Listener {
         final Player player = (Player)entityDamageEvent.getEntity();
 
         if (player.getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
-
             entityDamageEvent.setCancelled(true);
+        }
 
-            if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                player.teleport(BreakTheNexus.getInstance().getPlaceToSpawn(player.getName()));
-            }
-
+        if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
+            player.setHealth(0.0);
         }
 
     }
