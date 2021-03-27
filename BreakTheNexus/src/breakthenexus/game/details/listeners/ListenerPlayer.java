@@ -53,10 +53,12 @@ public class ListenerPlayer implements Listener {
 
         if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamRed().getNexus().getLocation())) {
             blockBreakEvent.setCancelled(true);
-            BreakTheNexus.getInstance().getTeamRed().getNexus().damage();
-        } else if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamBlue().getNexus().getLocation())) {
+            BreakTheNexus.getInstance().getTeamRed().getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked Red nexus!");
+        }
+
+        if (blockBreakEvent.getBlock().getLocation().equals(BreakTheNexus.getInstance().getTeamBlue().getNexus().getLocation())) {
             blockBreakEvent.setCancelled(true);
-            BreakTheNexus.getInstance().getTeamBlue().getNexus().damage();
+            BreakTheNexus.getInstance().getTeamBlue().getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked Blue nexus!");
         }
 
     }

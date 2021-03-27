@@ -34,7 +34,16 @@ public class Team {
             spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -87.0, 0.0f, 0.0f);
         }
 
-        nexus = new Nexus(this.name);
+        // TODO: automatically load nexus location from file instead
+        final Location location;
+        if (this.name.equals("Red")) {
+            location = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 29.0, 95.0);
+        } else if (this.name.equals("Blue")) {
+            location = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 29.0, -95.0);
+        } else {
+            location = null;
+        }
+        nexus = new Nexus(location);
 
     }
 
