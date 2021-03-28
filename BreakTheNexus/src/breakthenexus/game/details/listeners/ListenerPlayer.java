@@ -1,6 +1,7 @@
 package breakthenexus.game.details.listeners;
 
 import breakthenexus.BreakTheNexus;
+import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,6 +59,16 @@ public class ListenerPlayer implements Listener {
 
                 blockBreakEvent.setCancelled(true); // Causes the nexus block to instantly respawn
                 team.handleNexusAttack(blockBreakEvent.getPlayer().getName());
+
+            }
+        }
+
+        // Mines
+        for (Mine mine : BreakTheNexus.getInstance().getMines()) {
+            if (mine.getMaterial() == blockBreakEvent.getBlock().getType()) {
+
+                blockBreakEvent.setCancelled(true); // Causes the mine block to instantly respawn
+                mine.handleBlockBreak(blockBreakEvent.getBlock().getLocation());
 
             }
         }

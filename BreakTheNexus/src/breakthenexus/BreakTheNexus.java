@@ -1,10 +1,12 @@
 package breakthenexus;
 
 import breakthenexus.game.Map;
+import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class BreakTheNexus extends JavaPlugin {
 
     private List<Team> teams = new ArrayList<>();
 
+    private List<Mine> mines = new ArrayList<>();
+
     @Override
     public void onEnable() {
 
@@ -29,6 +33,8 @@ public class BreakTheNexus extends JavaPlugin {
 
         teams.add(new Team("Red"));
         teams.add(new Team("Blue"));
+
+        mines.add(new Mine(Material.MELON_BLOCK));
 
         getCommand("team").setExecutor(new CommandTeam());
 
@@ -68,6 +74,10 @@ public class BreakTheNexus extends JavaPlugin {
             }
         }
         return mapLobby.getWorld().getSpawnLocation();
+    }
+
+    public final Mine[] getMines() {
+        return mines.toArray(new Mine[0]);
     }
 
 }
