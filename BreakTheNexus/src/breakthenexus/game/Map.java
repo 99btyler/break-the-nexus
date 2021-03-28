@@ -9,10 +9,8 @@ public class Map {
     private final String worldFolderPath;
 
     public Map(String worldFolderName) {
-
         worldFolderPath = "worlds_BreakTheNexus/" + worldFolderName;
         new WorldCreator(worldFolderPath).createWorld(); // loads the world so players can be sent to it
-
     }
 
     public final World getWorld() {

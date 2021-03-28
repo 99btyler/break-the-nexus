@@ -14,17 +14,24 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 public class ListenerPlayer implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
+    private void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
         playerJoinEvent.getPlayer().teleport(BreakTheNexus.getInstance().getPlaceToSpawn(playerJoinEvent.getPlayer().getName()));
     }
 
     @EventHandler
-    public void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
+    private void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
         playerRespawnEvent.setRespawnLocation(BreakTheNexus.getInstance().getPlaceToSpawn(playerRespawnEvent.getPlayer().getName()));
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent entityDamageEvent) {
+    private void onFoodLevelChange(FoodLevelChangeEvent foodLevelChangeEvent) {
+        if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+            foodLevelChangeEvent.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    private void onEntityDamage(EntityDamageEvent entityDamageEvent) {
 
         if (!(entityDamageEvent.getEntity() instanceof Player)) {
             return;
@@ -43,38 +50,22 @@ public class ListenerPlayer implements Listener {
     }
 
     @EventHandler
-    public void onFoodLevelChange(FoodLevelChangeEvent foodLevelChangeEvent) {
-        if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
-            foodLevelChangeEvent.setCancelled(true);
-        }
-    }
+    private void onBlockBreak(BlockBreakEvent blockBreakEvent) {
 
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent blockBreakEvent) {
-
+        // Nexus
         for (Team team : BreakTheNexus.getInstance().getTeams()) {
             if (blockBreakEvent.getBlock().getLocation().equals(team.getNexus().getLocation())) {
-
-                blockBreakEvent.setCancelled(true);
-
-                if (team.has(blockBreakEvent.getPlayer().getName())) {
-
+                blockBreakEvent.setCancelled(true); // Causes the nexus block to instantly respawn
+                if (team.hasPlayer(blockBreakEvent.getPlayer().getName())) {
                     blockBreakEvent.getPlayer().sendMessage("Don't break your own nexus");
-
                 } else {
-
-                    final boolean destroyed = team.getNexus().damage(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
-
+                    final boolean destroyed = team.getNexus().damageNexus(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
                     if (destroyed) {
-
                         for (Player player : team.getNexus().getLocation().getWorld().getPlayers()) {
                             player.sendMessage(team.getTeamName() + " has been destroyed!");
                         }
-
                         team.end();
-
                     }
-
                 }
             }
         }

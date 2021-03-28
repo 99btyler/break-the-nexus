@@ -22,7 +22,7 @@ public class Nexus {
         return location;
     }
 
-    public final boolean damage(String attackerMessage) {
+    public final boolean damageNexus(String attackerMessage) {
 
         if (health <= 1) {
             location.getBlock().setType(Material.BEDROCK);

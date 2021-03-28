@@ -3,6 +3,7 @@ package breakthenexus.game;
 import breakthenexus.BreakTheNexus;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Team {
 
     private final List<String> playerNames = new ArrayList<>();
 
-    private final Location[] spawnpoints = new Location[3];
+    private final List<Location> spawnpoints = new ArrayList<>();
     private final Random random = new Random();
 
     private final Nexus nexus;
@@ -24,14 +25,15 @@ public class Team {
         this.teamName = teamName;
 
         // TODO: automatically load spawnpoints from file instead
+        final World mapGameWorld = BreakTheNexus.getInstance().getMapGame().getWorld();
         if (this.teamName.equals("Red")) {
-            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), -8.0, 20.0, 95.0, 180.0f, 0.0f);
-            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 8.0, 20.0, 95.0, 180.0f, 0.0f);
-            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, 87.0, 180.0f, 0.0f);
+            spawnpoints.add(new Location(mapGameWorld, -8.0, 20.0, 95.0, 180.0f, 0.0f));
+            spawnpoints.add(new Location(mapGameWorld, 8.0, 20.0, 95.0, 180.0f, 0.0f));
+            spawnpoints.add(new Location(mapGameWorld, 0.0, 20.0, 87.0, 180.0f, 0.0f));
         } else if (this.teamName.equals("Blue")) {
-            spawnpoints[0] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 8.0, 20.0, -95.0, 0.0f, 0.0f);
-            spawnpoints[1] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), -8.0, 20.0, -95.0, 0.0f, 0.0f);
-            spawnpoints[2] = new Location(BreakTheNexus.getInstance().getMapGame().getWorld(), 0.0, 20.0, -87.0, 0.0f, 0.0f);
+            spawnpoints.add(new Location(mapGameWorld, 8.0, 20.0, -95.0, 0.0f, 0.0f));
+            spawnpoints.add(new Location(mapGameWorld, -8.0, 20.0, -95.0, 0.0f, 0.0f));
+            spawnpoints.add(new Location(mapGameWorld, 0.0, 20.0, -87.0, 0.0f, 0.0f));
         }
 
         // TODO: automatically load nexus location from file instead
@@ -51,19 +53,19 @@ public class Team {
         return teamName;
     }
 
-    public final void join(String playerName) {
+    public final boolean hasPlayer(String playerName) {
+        return playerNames.contains(playerName);
+    }
+
+    public final void addPlayer(String playerName) {
         if (!playerNames.contains(playerName)) {
             playerNames.add(playerName);
             Bukkit.getPlayer(playerName).teleport(getRandomSpawnpoint());
         }
     }
 
-    public final boolean has(String playerName) {
-        return playerNames.contains(playerName);
-    }
-
     public final Location getRandomSpawnpoint() {
-        return spawnpoints[random.nextInt(spawnpoints.length - 0) + 0];
+        return spawnpoints.get(random.nextInt(spawnpoints.size() - 0) + 0);
     }
 
     public final Nexus getNexus() {
@@ -72,9 +74,8 @@ public class Team {
 
     public final void end() {
 
-        for (int i = 0; i < spawnpoints.length; i++) {
-            spawnpoints[i] = BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation();
-        }
+        spawnpoints.clear();
+        spawnpoints.add(BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation());
 
         for (String playerName : playerNames) {
             Bukkit.getPlayer(playerName).setHealth(0);

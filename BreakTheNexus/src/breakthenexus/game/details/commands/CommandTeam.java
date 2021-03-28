@@ -29,14 +29,16 @@ public class CommandTeam implements CommandExecutor {
                             break;
                         }
 
-                        if (((Player)commandSender).getWorld().getName().equals(BreakTheNexus.getInstance().getMapGame().getWorld().getName())) {
+                        final Player player = (Player)commandSender;
+
+                        if (player.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
                             commandSender.sendMessage("You're already in the game");
                             break;
                         }
 
                         for (Team team : BreakTheNexus.getInstance().getTeams()) {
                             if (args[1].equalsIgnoreCase(team.getTeamName())) {
-                                team.join(commandSender.getName());
+                                team.addPlayer(player.getName());
                             }
                         }
 
