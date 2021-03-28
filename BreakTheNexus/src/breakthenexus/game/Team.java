@@ -3,7 +3,9 @@ package breakthenexus.game;
 import breakthenexus.BreakTheNexus;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Random;
 public class Team {
 
     private final String teamName;
+    private boolean alive;
 
     private final List<String> playerNames = new ArrayList<>();
 
@@ -23,6 +26,7 @@ public class Team {
     public Team(String teamName) {
 
         this.teamName = teamName;
+        alive = true;
 
         // TODO: automatically load spawnpoints from file instead
         final World mapGameWorld = BreakTheNexus.getInstance().getMapGame().getWorld();
@@ -72,7 +76,38 @@ public class Team {
         return nexus;
     }
 
-    public final void end() {
+    public final void handleNexusAttack(String attackerName) {
+
+        if (playerNames.contains(attackerName)) {
+            Bukkit.getPlayer(attackerName).sendMessage("Don't attack your own nexus");
+            return;
+        }
+
+        nexus.reduceHealth(1);
+
+        for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+            player.sendMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
+        }
+
+        if (nexus.getHealth() < 1) {
+
+            nexus.getLocation().getBlock().setType(Material.BEDROCK);
+
+            if (alive) {
+
+                for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+                    player.sendMessage(teamName + " has been destroyed!");
+                }
+
+                kill();
+
+            }
+
+        }
+
+    }
+
+    public final void kill() {
 
         spawnpoints.clear();
         spawnpoints.add(BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation());
@@ -80,6 +115,8 @@ public class Team {
         for (String playerName : playerNames) {
             Bukkit.getPlayer(playerName).setHealth(0);
         }
+
+        alive = false;
 
     }
 

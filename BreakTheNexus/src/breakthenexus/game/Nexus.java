@@ -2,7 +2,6 @@ package breakthenexus.game;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
 public class Nexus {
 
@@ -22,21 +21,12 @@ public class Nexus {
         return location;
     }
 
-    public final boolean damageNexus(String attackerMessage) {
+    public final int getHealth() {
+        return health;
+    }
 
-        if (health <= 1) {
-            location.getBlock().setType(Material.BEDROCK);
-            return true; // Nexus has been destroyed
-        }
-
-        health -= 1;
-
-        for (Player player : location.getWorld().getPlayers()) {
-            player.sendMessage(attackerMessage + " (" + health + ")");
-        }
-
-        return false;
-
+    public final void reduceHealth(int amount) {
+        health -= amount;
     }
 
 }

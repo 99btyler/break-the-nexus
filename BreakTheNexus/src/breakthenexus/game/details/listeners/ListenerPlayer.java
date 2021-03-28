@@ -54,19 +54,11 @@ public class ListenerPlayer implements Listener {
 
         // Nexus
         for (Team team : BreakTheNexus.getInstance().getTeams()) {
-            if (blockBreakEvent.getBlock().getLocation().equals(team.getNexus().getLocation())) {
+            if (team.getNexus().getLocation().equals(blockBreakEvent.getBlock().getLocation())) {
+
                 blockBreakEvent.setCancelled(true); // Causes the nexus block to instantly respawn
-                if (team.hasPlayer(blockBreakEvent.getPlayer().getName())) {
-                    blockBreakEvent.getPlayer().sendMessage("Don't break your own nexus");
-                } else {
-                    final boolean destroyed = team.getNexus().damageNexus(blockBreakEvent.getPlayer().getName() + " attacked " + team.getTeamName() + " nexus!");
-                    if (destroyed) {
-                        for (Player player : team.getNexus().getLocation().getWorld().getPlayers()) {
-                            player.sendMessage(team.getTeamName() + " has been destroyed!");
-                        }
-                        team.end();
-                    }
-                }
+                team.handleNexusAttack(blockBreakEvent.getPlayer().getName());
+
             }
         }
 
