@@ -19,7 +19,7 @@ public class Team {
     private final List<String> playerNames = new ArrayList<>();
 
     private final List<Location> spawnpoints = new ArrayList<>();
-    private final Random random = new Random();
+    private final Random random = new Random(); // Used for picking random spawnpoint
 
     private final Nexus nexus;
 

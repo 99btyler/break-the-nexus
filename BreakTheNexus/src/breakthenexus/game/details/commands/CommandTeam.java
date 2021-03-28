@@ -37,7 +37,7 @@ public class CommandTeam implements CommandExecutor {
                         }
 
                         for (Team team : BreakTheNexus.getInstance().getTeams()) {
-                            if (args[1].equalsIgnoreCase(team.getTeamName())) {
+                            if (team.getTeamName().equalsIgnoreCase(args[1])) {
                                 team.addPlayer(player.getName());
                             }
                         }

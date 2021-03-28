@@ -6,6 +6,7 @@ import org.bukkit.Material;
 public class Nexus {
 
     private final Location location;
+
     private int health;
 
     public Nexus(Location location) {
