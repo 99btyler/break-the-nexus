@@ -8,9 +8,11 @@ import org.bukkit.Material;
 public class Mine {
 
     private final Material material;
+    private final int blockRespawnDelay;
 
-    public Mine(Material material) {
+    public Mine(Material material, int blockRespawnDelay) {
         this.material = material;
+        this.blockRespawnDelay = blockRespawnDelay;
     }
 
     public final Material getMaterial() {
@@ -26,7 +28,7 @@ public class Mine {
             public void run() {
                 blockLocation.getBlock().setType(material);
             }
-        }, 20 * 5);
+        }, 20 * blockRespawnDelay);
 
     }
 
