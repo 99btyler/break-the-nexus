@@ -34,6 +34,9 @@ public class BreakTheNexus extends JavaPlugin {
         teams.add(new Team("Red"));
         teams.add(new Team("Blue"));
 
+        mines.add(new Mine(Material.IRON_ORE));
+        mines.add(new Mine(Material.GOLD_ORE));
+        mines.add(new Mine(Material.COAL_ORE));
         mines.add(new Mine(Material.MELON_BLOCK));
 
         getCommand("team").setExecutor(new CommandTeam());
