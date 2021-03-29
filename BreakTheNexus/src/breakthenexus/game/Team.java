@@ -1,10 +1,7 @@
 package breakthenexus.game;
 
 import breakthenexus.BreakTheNexus;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -86,6 +83,7 @@ public class Team {
         nexus.reduceHealth(1);
 
         for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+            player.playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0f, 0.1f);
             player.sendMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
         }
 
@@ -96,6 +94,7 @@ public class Team {
             if (alive) {
 
                 for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+                    player.playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
                     player.sendMessage(teamName + " has been destroyed!");
                 }
 
