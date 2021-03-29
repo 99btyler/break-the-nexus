@@ -61,15 +61,6 @@ public class BreakTheNexus extends JavaPlugin {
         return teams.toArray(new Team[0]);
     }
 
-    public final Team getTeam(String teamName) {
-        for (Team team : teams) {
-            if (team.getTeamName().equals(teamName)) {
-                return team;
-            }
-        }
-        return null;
-    }
-
     public final Location getPlaceToSpawn(String playerName) {
         for (Team team : teams) {
             if (team.hasPlayer(playerName)) {
