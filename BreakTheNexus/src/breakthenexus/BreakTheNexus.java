@@ -61,6 +61,10 @@ public class BreakTheNexus extends JavaPlugin {
         return teams.toArray(new Team[0]);
     }
 
+    public final Mine[] getMines() {
+        return mines.toArray(new Mine[0]);
+    }
+
     public final Location getPlaceToSpawn(String playerName) {
         for (Team team : teams) {
             if (team.hasPlayer(playerName)) {
@@ -68,10 +72,6 @@ public class BreakTheNexus extends JavaPlugin {
             }
         }
         return mapLobby.getWorld().getSpawnLocation();
-    }
-
-    public final Mine[] getMines() {
-        return mines.toArray(new Mine[0]);
     }
 
 }
