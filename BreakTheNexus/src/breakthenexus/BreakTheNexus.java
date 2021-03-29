@@ -5,6 +5,7 @@ import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
+import breakthenexus.game.details.listeners.ListenerWorld;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -42,6 +43,7 @@ public class BreakTheNexus extends JavaPlugin {
         getCommand("team").setExecutor(new CommandTeam());
 
         getServer().getPluginManager().registerEvents(new ListenerPlayer(), this);
+        getServer().getPluginManager().registerEvents(new ListenerWorld(), this);
 
     }
 
