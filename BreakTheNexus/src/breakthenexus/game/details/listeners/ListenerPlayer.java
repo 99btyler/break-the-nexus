@@ -34,18 +34,14 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onEntityDamage(EntityDamageEvent entityDamageEvent) {
 
-        if (!(entityDamageEvent.getEntity() instanceof Player)) {
-            return;
-        }
-
-        final Player player = (Player)entityDamageEvent.getEntity();
-
-        if (player.getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+        if (entityDamageEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
             entityDamageEvent.setCancelled(true);
         }
 
-        if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
-            player.setHealth(0.0);
+        if (entityDamageEvent.getEntity() instanceof Player) {
+            if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
+                ((Player)entityDamageEvent.getEntity()).setHealth(0.0);
+            }
         }
 
     }
