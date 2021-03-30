@@ -83,6 +83,11 @@ public class Team {
 
     public final void handleNexusAttack(String attackerName) {
 
+        if (!alive) {
+            Bukkit.getPlayer(attackerName).sendMessage(teamName + " is not alive");
+            return;
+        }
+
         if (playerNames.contains(attackerName)) {
             Bukkit.getPlayer(attackerName).sendMessage("Don't attack your own nexus");
             return;
@@ -90,40 +95,28 @@ public class Team {
 
         nexus.reduceHealth(1);
 
-        for (Player player : nexus.getLocation().getWorld().getPlayers()) {
-            player.playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0f, 0.1f);
-            player.sendMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
-        }
-
         if (nexus.getHealth() < 1) {
 
             nexus.getLocation().getBlock().setType(Material.BEDROCK);
 
-            if (alive) {
-
-                for (Player player : nexus.getLocation().getWorld().getPlayers()) {
-                    player.playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
-                    player.sendMessage(teamName + " has been destroyed!");
-                }
-
-                kill();
-
+            for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+                player.playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
+                player.sendMessage(teamName + " has been destroyed!");
             }
 
+            spawnpoints.clear();
+            spawnpoints.add(BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation());
+
+            alive = false;
+
+            return;
+
         }
 
-    }
-
-    public final void kill() {
-
-        spawnpoints.clear();
-        spawnpoints.add(BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation());
-
-        for (String playerName : playerNames) {
-            Bukkit.getPlayer(playerName).setHealth(0);
+        for (Player player : nexus.getLocation().getWorld().getPlayers()) {
+            player.playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0f, 0.1f);
+            player.sendMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
         }
-
-        alive = false;
 
     }
 
