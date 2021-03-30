@@ -59,10 +59,18 @@ public class Team {
     }
 
     public final void addPlayer(String playerName) {
+
         if (!playerNames.contains(playerName)) {
+
             playerNames.add(playerName);
+
+            BreakTheNexus.getInstance().getKitManager().updateKitUsers(playerName, "Civilian");
+            BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(playerName);
+
             Bukkit.getPlayer(playerName).teleport(getRandomSpawnpoint());
+
         }
+
     }
 
     public final Location getRandomSpawnpoint() {

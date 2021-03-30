@@ -6,6 +6,10 @@ import breakthenexus.game.Team;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import breakthenexus.game.details.listeners.ListenerWorld;
+import breakthenexus.game.kit.KitManager;
+import breakthenexus.game.kit.kits.Civilian;
+import breakthenexus.game.kit.kits.Miner;
+import breakthenexus.game.kit.kits.Warrior;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +24,8 @@ public class BreakTheNexus extends JavaPlugin {
     private Map mapLobby;
     private Map mapGame;
 
+    private final KitManager kitManager = new KitManager();
+
     private List<Team> teams = new ArrayList<>();
 
     private List<Mine> mines = new ArrayList<>();
@@ -31,6 +37,10 @@ public class BreakTheNexus extends JavaPlugin {
 
         mapLobby = new Map("The Lobby");
         mapGame = new Map("Roastal");
+
+        kitManager.addKit(new Civilian());
+        kitManager.addKit(new Miner());
+        kitManager.addKit(new Warrior());
 
         teams.add(new Team("Red"));
         teams.add(new Team("Blue"));
@@ -57,6 +67,10 @@ public class BreakTheNexus extends JavaPlugin {
 
     public final Map getMapGame() {
         return mapGame;
+    }
+
+    public final KitManager getKitManager() {
+        return kitManager;
     }
 
     public final Team[] getTeams() {

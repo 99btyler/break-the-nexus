@@ -22,6 +22,7 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
         playerRespawnEvent.setRespawnLocation(BreakTheNexus.getInstance().getPlaceToSpawn(playerRespawnEvent.getPlayer().getName()));
+        BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(playerRespawnEvent.getPlayer().getName());
     }
 
     @EventHandler
