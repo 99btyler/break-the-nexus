@@ -65,7 +65,7 @@ public class ListenerPlayer implements Listener {
             if (mine.getMaterial() == blockBreakEvent.getBlock().getType()) {
 
                 blockBreakEvent.setCancelled(true); // Causes the mine block to instantly respawn
-                mine.handleBlockBreak(blockBreakEvent.getBlock().getLocation());
+                mine.handleBlockBreakEvent(blockBreakEvent);
 
             }
         }

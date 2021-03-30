@@ -48,7 +48,7 @@ public class BreakTheNexus extends JavaPlugin {
         mines.add(new Mine(Material.IRON_ORE, 15));
         mines.add(new Mine(Material.GOLD_ORE, 30));
         mines.add(new Mine(Material.COAL_ORE, 5));
-        mines.add(new Mine(Material.MELON_BLOCK, 5));
+        mines.add(new Mine(Material.MELON_BLOCK, Material.MELON, 5));
 
         getCommand("team").setExecutor(new CommandTeam());
 
