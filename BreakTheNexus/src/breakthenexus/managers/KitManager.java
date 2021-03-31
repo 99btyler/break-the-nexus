@@ -1,24 +1,27 @@
-package breakthenexus.game.kit;
+package breakthenexus.managers;
 
 import breakthenexus.BreakTheNexus;
+import breakthenexus.game.kit.Kit;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class KitManager {
 
-    private final List<Kit> kits = new ArrayList<>();
+    private final Kit[] kits;
 
-    // Key = playerName. Value = kitName.
+    // key = playerName, value = kitName
     private final Map<String, String> kitUsers = new HashMap<>();
 
-    public final void addKit(Kit kit) {
-        kits.add(kit);
+    public KitManager(Kit[] kits) {
+        this.kits = kits;
+    }
+
+    public final Kit[] getKits() {
+        return kits;
     }
 
     public final String getKitNameUsedBy(String playerName) {

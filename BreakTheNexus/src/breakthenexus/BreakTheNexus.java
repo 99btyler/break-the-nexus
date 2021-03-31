@@ -7,10 +7,11 @@ import breakthenexus.game.details.commands.CommandKit;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import breakthenexus.game.details.listeners.ListenerWorld;
-import breakthenexus.game.kit.KitManager;
+import breakthenexus.game.kit.Kit;
 import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
+import breakthenexus.managers.KitManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -55,10 +56,11 @@ public class BreakTheNexus extends JavaPlugin {
         mines.add(new Mine(Material.LOG, Material.WOOD, 10));
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mines loaded!");
 
-        kitManager = new KitManager();
-        kitManager.addKit(new Civilian());
-        kitManager.addKit(new Miner());
-        kitManager.addKit(new Warrior());
+        kitManager = new KitManager(new Kit[] {
+                new Civilian(),
+                new Miner(),
+                new Warrior()
+        });
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus kits loaded!");
 
         getCommand("kit").setExecutor(new CommandKit());
