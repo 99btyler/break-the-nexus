@@ -17,11 +17,13 @@ import breakthenexus.managers.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
 
     private Map mapLobby;
+
     private Map mapGame;
 
     private TeamManager teamManager;
@@ -39,8 +41,12 @@ public class BreakTheNexus extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus being enabled...");
 
         mapLobby = new Map("The Lobby");
+        mapLobby.loadWorld();
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mapLobby loaded!");
+
         mapGame = new Map("Roastal");
-        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus maps loaded!");
+        mapGame.loadWorld();
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mapGame loaded!");
 
         teamManager = new TeamManager(new Team[] {
                 new Team("Red"),
@@ -73,6 +79,26 @@ public class BreakTheNexus extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus listeners registered!");
 
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus enabled!");
+
+    }
+
+    @Override
+    public void onDisable() {
+
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus being disabled...");
+
+        for (Player player : mapGame.getWorld().getPlayers()) {
+            player.getInventory().clear();
+            player.teleport(mapLobby.getWorld().getSpawnLocation());
+            player.setHealth(20.0);
+            player.setFoodLevel(20);
+        }
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mapGame players moved to mapLobby!");
+
+        mapGame.unloadWorld();
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mapGame unloaded");
+
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus disabled");
 
     }
 
