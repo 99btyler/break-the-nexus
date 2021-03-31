@@ -56,7 +56,7 @@ public class KitManager {
                 }
 
             }
-        }, 20 * 1); // 1 second
+        }, 20 * 1); // 20 ticks = 1 second
 
     }
 

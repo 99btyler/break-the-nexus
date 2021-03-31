@@ -38,7 +38,7 @@ public class Mine {
             public void run() {
                 blockBreakEvent.getBlock().setType(material);
             }
-        }, 20 * blockRespawnDelay);
+        }, 20 * blockRespawnDelay); // 20 ticks = 1 second
 
     }
 
