@@ -12,14 +12,12 @@ import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
 import breakthenexus.managers.KitManager;
+import breakthenexus.managers.MineManager;
 import breakthenexus.managers.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class BreakTheNexus extends JavaPlugin {
 
@@ -28,7 +26,7 @@ public class BreakTheNexus extends JavaPlugin {
 
     private TeamManager teamManager;
 
-    private List<Mine> mines; // TODO: make MineManager
+    private MineManager mineManager;
 
     private KitManager kitManager;
 
@@ -50,12 +48,13 @@ public class BreakTheNexus extends JavaPlugin {
         });
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus teams loaded!");
 
-        mines = new ArrayList<>();
-        mines.add(new Mine(Material.IRON_ORE, 15));
-        mines.add(new Mine(Material.GOLD_ORE, 30));
-        mines.add(new Mine(Material.COAL_ORE, Material.COAL, 5));
-        mines.add(new Mine(Material.MELON_BLOCK, Material.MELON, 5));
-        mines.add(new Mine(Material.LOG, Material.WOOD, 10));
+        mineManager = new MineManager(new Mine[] {
+                new Mine(Material.IRON_ORE, 15),
+                new Mine(Material.GOLD_ORE, 30),
+                new Mine(Material.COAL_ORE, Material.COAL, 5),
+                new Mine(Material.MELON_BLOCK, Material.MELON, 5),
+                new Mine(Material.LOG, Material.WOOD, 10)
+        });
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mines loaded!");
 
         kitManager = new KitManager(new Kit[] {
@@ -93,8 +92,8 @@ public class BreakTheNexus extends JavaPlugin {
         return teamManager;
     }
 
-    public final Mine[] getMines() {
-        return mines.toArray(new Mine[0]);
+    public final MineManager getMineManager() {
+        return mineManager;
     }
 
     public final KitManager getKitManager() {

@@ -61,7 +61,7 @@ public class ListenerPlayer implements Listener {
         }
 
         // Mines
-        for (Mine mine : BreakTheNexus.getInstance().getMines()) {
+        for (Mine mine : BreakTheNexus.getInstance().getMineManager().getMines()) {
             if (mine.getMaterial() == blockBreakEvent.getBlock().getType()) {
 
                 blockBreakEvent.setCancelled(true); // Causes the mine block to instantly respawn
