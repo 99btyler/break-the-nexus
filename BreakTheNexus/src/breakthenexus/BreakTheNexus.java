@@ -3,6 +3,7 @@ package breakthenexus;
 import breakthenexus.game.Map;
 import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
+import breakthenexus.game.details.commands.CommandKit;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import breakthenexus.game.details.listeners.ListenerWorld;
@@ -51,6 +52,7 @@ public class BreakTheNexus extends JavaPlugin {
         mines.add(new Mine(Material.MELON_BLOCK, Material.MELON, 5));
         mines.add(new Mine(Material.LOG, Material.WOOD, 10));
 
+        getCommand("kit").setExecutor(new CommandKit());
         getCommand("team").setExecutor(new CommandTeam());
 
         getServer().getPluginManager().registerEvents(new ListenerPlayer(), this);

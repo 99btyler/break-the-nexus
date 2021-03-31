@@ -21,6 +21,10 @@ public class KitManager {
         kits.add(kit);
     }
 
+    public final String getKitNameUsedBy(String playerName) {
+        return kitUsers.get(playerName);
+    }
+
     public final void updateKitUsers(String playerName, String kitName) {
         for (Kit kit : kits) {
             if (kit.getKitName().equals(kitName)) {
