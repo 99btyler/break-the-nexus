@@ -11,6 +11,7 @@ import breakthenexus.game.kit.KitManager;
 import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,43 +21,55 @@ import java.util.List;
 
 public class BreakTheNexus extends JavaPlugin {
 
-    private static BreakTheNexus instance;
-
     private Map mapLobby;
     private Map mapGame;
 
-    private final KitManager kitManager = new KitManager();
+    private List<Team> teams; // TODO: make TeamManager
 
-    private List<Team> teams = new ArrayList<>();
+    private List<Mine> mines; // TODO: make MineManager
 
-    private List<Mine> mines = new ArrayList<>();
+    private KitManager kitManager;
+
+    private static BreakTheNexus instance;
 
     @Override
     public void onEnable() {
 
         instance = this;
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus being enabled...");
 
         mapLobby = new Map("The Lobby");
         mapGame = new Map("Roastal");
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus maps loaded!");
 
-        kitManager.addKit(new Civilian());
-        kitManager.addKit(new Miner());
-        kitManager.addKit(new Warrior());
-
+        teams = new ArrayList<>();
         teams.add(new Team("Red"));
         teams.add(new Team("Blue"));
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus teams loaded!");
 
+        mines = new ArrayList<>();
         mines.add(new Mine(Material.IRON_ORE, 15));
         mines.add(new Mine(Material.GOLD_ORE, 30));
         mines.add(new Mine(Material.COAL_ORE, Material.COAL, 5));
         mines.add(new Mine(Material.MELON_BLOCK, Material.MELON, 5));
         mines.add(new Mine(Material.LOG, Material.WOOD, 10));
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus mines loaded!");
+
+        kitManager = new KitManager();
+        kitManager.addKit(new Civilian());
+        kitManager.addKit(new Miner());
+        kitManager.addKit(new Warrior());
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus kits loaded!");
 
         getCommand("kit").setExecutor(new CommandKit());
         getCommand("team").setExecutor(new CommandTeam());
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus commands registered!");
 
         getServer().getPluginManager().registerEvents(new ListenerPlayer(), this);
         getServer().getPluginManager().registerEvents(new ListenerWorld(), this);
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus listeners registered!");
+
+        getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus enabled!");
 
     }
 
@@ -72,16 +85,16 @@ public class BreakTheNexus extends JavaPlugin {
         return mapGame;
     }
 
-    public final KitManager getKitManager() {
-        return kitManager;
-    }
-
     public final Team[] getTeams() {
         return teams.toArray(new Team[0]);
     }
 
     public final Mine[] getMines() {
         return mines.toArray(new Mine[0]);
+    }
+
+    public final KitManager getKitManager() {
+        return kitManager;
     }
 
     public final Location getPlaceToSpawn(String playerName) {
