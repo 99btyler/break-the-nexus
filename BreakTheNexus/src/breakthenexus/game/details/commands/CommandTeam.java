@@ -36,7 +36,7 @@ public class CommandTeam implements CommandExecutor {
                             break;
                         }
 
-                        for (Team team : BreakTheNexus.getInstance().getTeams()) {
+                        for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
                             if (team.getTeamName().equalsIgnoreCase(args[1])) {
                                 team.addPlayer(player.getName());
                             }
@@ -49,7 +49,7 @@ public class CommandTeam implements CommandExecutor {
                 case "view":
 
                     commandSender.sendMessage("----");
-                    for (Team team : BreakTheNexus.getInstance().getTeams()) {
+                    for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
                         commandSender.sendMessage(team.getInfo());
                     }
                     commandSender.sendMessage("----");

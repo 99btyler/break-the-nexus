@@ -51,7 +51,7 @@ public class ListenerPlayer implements Listener {
     private void onBlockBreak(BlockBreakEvent blockBreakEvent) {
 
         // Nexus
-        for (Team team : BreakTheNexus.getInstance().getTeams()) {
+        for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
             if (team.getNexus().getLocation().equals(blockBreakEvent.getBlock().getLocation())) {
 
                 blockBreakEvent.setCancelled(true); // Causes the nexus block to instantly respawn

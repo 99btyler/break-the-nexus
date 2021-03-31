@@ -12,6 +12,7 @@ import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
 import breakthenexus.managers.KitManager;
+import breakthenexus.managers.TeamManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,7 +26,7 @@ public class BreakTheNexus extends JavaPlugin {
     private Map mapLobby;
     private Map mapGame;
 
-    private List<Team> teams; // TODO: make TeamManager
+    private TeamManager teamManager;
 
     private List<Mine> mines; // TODO: make MineManager
 
@@ -43,9 +44,10 @@ public class BreakTheNexus extends JavaPlugin {
         mapGame = new Map("Roastal");
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus maps loaded!");
 
-        teams = new ArrayList<>();
-        teams.add(new Team("Red"));
-        teams.add(new Team("Blue"));
+        teamManager = new TeamManager(new Team[] {
+                new Team("Red"),
+                new Team("Blue")
+        });
         getServer().getConsoleSender().sendMessage(ChatColor.GOLD + "BreakTheNexus teams loaded!");
 
         mines = new ArrayList<>();
@@ -87,8 +89,8 @@ public class BreakTheNexus extends JavaPlugin {
         return mapGame;
     }
 
-    public final Team[] getTeams() {
-        return teams.toArray(new Team[0]);
+    public final TeamManager getTeamManager() {
+        return teamManager;
     }
 
     public final Mine[] getMines() {
@@ -100,7 +102,7 @@ public class BreakTheNexus extends JavaPlugin {
     }
 
     public final Location getPlaceToSpawn(String playerName) {
-        for (Team team : teams) {
+        for (Team team : teamManager.getTeams()) {
             if (team.hasPlayer(playerName)) {
                 return team.getRandomSpawnpoint();
             }
