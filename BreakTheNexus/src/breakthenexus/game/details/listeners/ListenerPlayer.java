@@ -50,12 +50,18 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onBlockBreak(BlockBreakEvent blockBreakEvent) {
 
+        if (blockBreakEvent.getBlock().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+            blockBreakEvent.setCancelled(true);
+            return;
+        }
+
         // Nexus
         for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
             if (team.getNexus().getLocation().equals(blockBreakEvent.getBlock().getLocation())) {
 
                 blockBreakEvent.setCancelled(true); // Causes the nexus block to instantly respawn
                 team.handleNexusAttack(blockBreakEvent.getPlayer().getName());
+                return;
 
             }
         }
@@ -66,6 +72,7 @@ public class ListenerPlayer implements Listener {
 
                 blockBreakEvent.setCancelled(true); // Causes the mine block to instantly respawn
                 mine.handleBlockBreakEvent(blockBreakEvent);
+                return;
 
             }
         }
