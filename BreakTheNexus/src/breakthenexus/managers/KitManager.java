@@ -28,12 +28,14 @@ public class KitManager {
         return kitUsers.get(playerName);
     }
 
-    public final void updateKitUsers(String playerName, String kitName) {
+    public final boolean updateKitUsers(String playerName, String kitName) {
         for (Kit kit : kits) {
-            if (kit.getKitName().equals(kitName)) {
+            if (kit.getKitName().equalsIgnoreCase(kitName)) {
                 kitUsers.put(playerName, kit.getKitName());
+                return true;
             }
         }
+        return false;
     }
 
     public final void giveKitItemsTo(String playerName) {

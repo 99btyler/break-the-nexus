@@ -18,6 +18,32 @@ public class CommandKit implements CommandExecutor {
             switch (args[0].toLowerCase()) {
 
                 case "switch":
+
+                    if (!(commandSender instanceof Player)) {
+                        commandSender.sendMessage("That command is only for players");
+                        break;
+                    }
+
+                    if (args.length != 2) {
+                        commandSender.sendMessage("/kit switch [kitName]");
+                    } else {
+
+                        final Player player = (Player)commandSender;
+
+                        if (player.getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+                            commandSender.sendMessage("You must be in game");
+                            break;
+                        }
+
+                        final boolean switched = BreakTheNexus.getInstance().getKitManager().updateKitUsers(player.getName(), args[1]);
+
+                        if (switched) {
+                            player.sendMessage("Success!");
+                            player.setHealth(0);
+                        }
+
+                    }
+
                     break;
 
                 case "view":
