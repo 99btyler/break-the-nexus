@@ -72,10 +72,7 @@ public class BreakTheNexus extends JavaPlugin {
     public void onDisable() {
 
         for (Player player : mapGame.getWorld().getPlayers()) {
-            player.getInventory().clear();
-            player.teleport(mapLobby.getWorld().getSpawnLocation());
-            player.setHealth(20.0);
-            player.setFoodLevel(20);
+            mapLobby.bringPlayer(player.getName());
         }
 
         mapGame.unloadWorld();
@@ -109,10 +106,10 @@ public class BreakTheNexus extends JavaPlugin {
     public final Location getPlaceToSpawn(String playerName) {
         for (Team team : teamManager.getTeams()) {
             if (team.hasPlayer(playerName)) {
-                return team.getRandomSpawnpoint();
+                return team.getRandomSpawnpoint(); // In game world
             }
         }
-        return mapLobby.getWorld().getSpawnLocation();
+        return mapLobby.getWorld().getSpawnLocation(); // In lobby world
     }
 
 }

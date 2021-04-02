@@ -3,6 +3,7 @@ package breakthenexus.game.details.listeners;
 import breakthenexus.BreakTheNexus;
 import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,13 +17,36 @@ public class ListenerPlayer implements Listener {
 
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
-        playerJoinEvent.getPlayer().teleport(BreakTheNexus.getInstance().getPlaceToSpawn(playerJoinEvent.getPlayer().getName()));
+
+        final Player player = playerJoinEvent.getPlayer();
+        final Location placeToSpawn = BreakTheNexus.getInstance().getPlaceToSpawn(player.getName());
+
+        player.teleport(placeToSpawn);
+
+        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
+
+            player.getInventory().clear();
+            player.setHealth(20.0);
+            player.setFoodLevel(20);
+
+        }
+
     }
 
     @EventHandler
     private void onPlayerRespawn(PlayerRespawnEvent playerRespawnEvent) {
-        playerRespawnEvent.setRespawnLocation(BreakTheNexus.getInstance().getPlaceToSpawn(playerRespawnEvent.getPlayer().getName()));
-        BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(playerRespawnEvent.getPlayer().getName());
+
+        final Player player = playerRespawnEvent.getPlayer();
+        final Location placeToSpawn = BreakTheNexus.getInstance().getPlaceToSpawn(player.getName());
+
+        playerRespawnEvent.setRespawnLocation(placeToSpawn);
+
+        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
+
+            BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(player.getName());
+
+        }
+
     }
 
     @EventHandler
