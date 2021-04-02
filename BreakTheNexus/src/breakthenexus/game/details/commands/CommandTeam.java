@@ -21,7 +21,9 @@ public class CommandTeam implements CommandExecutor {
                 case "join":
 
                     if (args.length != 2) {
+
                         commandSender.sendMessage("/team join [teamName]");
+
                     } else {
 
                         if (!(commandSender instanceof Player)) {
@@ -32,7 +34,7 @@ public class CommandTeam implements CommandExecutor {
                         final Player player = (Player)commandSender;
 
                         if (player.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
-                            commandSender.sendMessage("You're already in the game");
+                            player.sendMessage("You're already in the game");
                             break;
                         }
 

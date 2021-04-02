@@ -21,14 +21,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
 
+    private static BreakTheNexus instance;
+
     private Map mapLobby;
     private Map mapGame;
 
     private TeamManager teamManager;
     private MineManager mineManager;
     private KitManager kitManager;
-
-    private static BreakTheNexus instance;
 
     @Override
     public void onEnable() {

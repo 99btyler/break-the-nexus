@@ -30,13 +30,15 @@ public class Mine {
 
     public final void handleBlockBreakEvent(BlockBreakEvent blockBreakEvent) {
 
-        blockBreakEvent.getPlayer().getInventory().addItem(new ItemStack(materialOutput));
         blockBreakEvent.getBlock().setType(Material.BEDROCK);
+        blockBreakEvent.getPlayer().getInventory().addItem(new ItemStack(materialOutput));
 
         Bukkit.getScheduler().runTaskLater(BreakTheNexus.getInstance(), new Runnable() {
             @Override
             public void run() {
+
                 blockBreakEvent.getBlock().setType(material);
+
             }
         }, 20 * blockRespawnDelay); // 20 ticks = 1 second
 

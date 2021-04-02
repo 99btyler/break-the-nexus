@@ -32,14 +32,16 @@ public class CommandKit implements CommandExecutor {
 
                 case "switch":
 
-                    if (!(commandSender instanceof Player)) {
-                        commandSender.sendMessage("That command is only for players");
-                        break;
-                    }
-
                     if (args.length != 2) {
+
                         commandSender.sendMessage("/kit switch [kitName]");
+
                     } else {
+
+                        if (!(commandSender instanceof Player)) {
+                            commandSender.sendMessage("That command is only for players");
+                            break;
+                        }
 
                         final Player player = (Player)commandSender;
 

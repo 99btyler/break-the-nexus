@@ -31,11 +31,13 @@ public class KitManager {
     public final boolean updateKitUsers(String playerName, String kitName) {
         for (Kit kit : kits) {
             if (kit.getKitName().equalsIgnoreCase(kitName)) {
+
                 kitUsers.put(playerName, kit.getKitName());
-                return true;
+                return true; // Update succeeded
+
             }
         }
-        return false;
+        return false; // Update failed
     }
 
     public final void giveKitItemsTo(String playerName) {
@@ -51,9 +53,11 @@ public class KitManager {
 
                 for (Kit kit : kits) {
                     if (kit.getKitName().equals(kitName)) {
+
                         for (ItemStack itemStack : kit.getItems()) {
                             player.getInventory().addItem(itemStack);
                         }
+
                     }
                 }
 
