@@ -32,6 +32,11 @@ public class Map {
         player.teleport(getWorld().getSpawnLocation());
 
         player.getInventory().clear();
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
+
         player.setHealth(20.0);
         player.setFoodLevel(20);
 

@@ -54,8 +54,12 @@ public class KitManager {
                 for (Kit kit : kits) {
                     if (kit.getKitName().equals(kitName)) {
 
-                        for (ItemStack itemStack : kit.getItems()) {
-                            player.getInventory().addItem(itemStack);
+                        for (ItemStack toolItem : kit.getToolItems()) {
+                            player.getInventory().addItem(toolItem);
+                        }
+
+                        for (ItemStack armorItem : kit.getArmorItems()) {
+                            player.getInventory().addItem(armorItem);
                         }
 
                     }
