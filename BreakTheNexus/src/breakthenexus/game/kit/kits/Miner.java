@@ -19,7 +19,8 @@ public class Miner extends Kit {
                         new ItemStack(Material.STONE_PICKAXE),
                         new ItemStack(Material.WOOD_SWORD),
                         new ItemStack(Material.WOOD_AXE)
-                }
+                },
+                new ItemStack(Material.GOLD_NUGGET)
         );
 
     }

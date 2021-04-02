@@ -20,7 +20,8 @@ public class Civilian extends Kit {
                         new ItemStack(Material.WOOD_SWORD),
                         new ItemStack(Material.STONE_AXE),
                         new ItemStack(Material.STONE_SPADE)
-                }
+                },
+                new ItemStack(Material.CLAY_BRICK)
         );
 
     }

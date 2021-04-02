@@ -19,7 +19,8 @@ public class Warrior extends Kit {
                         new ItemStack(Material.WOOD_PICKAXE),
                         new ItemStack(Material.STONE_SWORD),
                         new ItemStack(Material.WOOD_AXE)
-                }
+                },
+                new ItemStack(Material.BLAZE_POWDER)
         );
 
     }

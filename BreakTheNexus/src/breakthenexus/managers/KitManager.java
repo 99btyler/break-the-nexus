@@ -60,6 +60,8 @@ public class KitManager {
                             player.getInventory().addItem(toolItem);
                         }
 
+                        player.getInventory().addItem(kit.getSpecialItem());
+
                     }
                 }
 

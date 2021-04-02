@@ -8,10 +8,12 @@ public abstract class Kit {
 
     private final ItemStack[] armorItems;
     private final ItemStack[] toolItems;
+    private final ItemStack specialItem;
 
-    public Kit(ItemStack[] armorItems, ItemStack[] toolItems) {
+    public Kit(ItemStack[] armorItems, ItemStack[] toolItems, ItemStack specialItem) {
         this.armorItems = armorItems;
         this.toolItems = toolItems;
+        this.specialItem = specialItem;
     }
 
     public final String getKitName() {
@@ -24,6 +26,10 @@ public abstract class Kit {
 
     public final ItemStack[] getToolItems() {
         return toolItems;
+    }
+
+    public final ItemStack getSpecialItem() {
+        return specialItem;
     }
 
 }
