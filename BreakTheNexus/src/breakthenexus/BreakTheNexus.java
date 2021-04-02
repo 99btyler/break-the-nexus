@@ -50,8 +50,8 @@ public class BreakTheNexus extends JavaPlugin {
                 new Mine(Material.IRON_ORE, 15),
                 new Mine(Material.GOLD_ORE, 30),
                 new Mine(Material.COAL_ORE, Material.COAL, 5),
-                new Mine(Material.MELON_BLOCK, Material.MELON, 5),
-                new Mine(Material.LOG, Material.WOOD, 10)
+                new Mine(Material.MELON_BLOCK, Material.MELON, 12, 5),
+                new Mine(Material.LOG, Material.WOOD, 4, 10)
         });
 
         kitManager = new KitManager(new Kit[] {
