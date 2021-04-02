@@ -51,9 +51,11 @@ public class ListenerPlayer implements Listener {
 
     @EventHandler
     private void onFoodLevelChange(FoodLevelChangeEvent foodLevelChangeEvent) {
+
         if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapLobby().getWorld()) {
             foodLevelChangeEvent.setCancelled(true);
         }
+
     }
 
     @EventHandler
