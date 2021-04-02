@@ -6,19 +6,25 @@ public abstract class Kit {
 
     private final String kitName = getClass().getSimpleName();
 
-    private final ItemStack[] armorItems;
-    private final ItemStack[] toolItems;
-    private final ItemStack specialItem;
+    protected ItemStack[] armorItems = null;
+    protected ItemStack[] toolItems = null;
+    protected ItemStack specialItem = null;
 
-    public Kit(ItemStack[] armorItems, ItemStack[] toolItems, ItemStack specialItem) {
-        this.armorItems = armorItems;
-        this.toolItems = toolItems;
-        this.specialItem = specialItem;
+    public Kit() {
+
+        setArmorItems();
+        setToolItems();
+        setSpecialItem();
+
     }
 
     public final String getKitName() {
         return kitName;
     }
+
+    protected abstract void setArmorItems();
+    protected abstract void setToolItems();
+    protected abstract void setSpecialItem();
 
     public final ItemStack[] getArmorItems() {
         return armorItems;

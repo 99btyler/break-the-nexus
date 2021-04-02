@@ -6,22 +6,33 @@ import org.bukkit.inventory.ItemStack;
 
 public class Miner extends Kit {
 
-    public Miner() {
+    @Override
+    protected void setArmorItems() {
 
-        super(
-                new ItemStack[] {
-                        new ItemStack(Material.LEATHER_HELMET),
-                        new ItemStack(Material.LEATHER_CHESTPLATE),
-                        new ItemStack(Material.LEATHER_LEGGINGS),
-                        new ItemStack(Material.LEATHER_BOOTS)
-                },
-                new ItemStack[] {
-                        new ItemStack(Material.STONE_PICKAXE),
-                        new ItemStack(Material.WOOD_SWORD),
-                        new ItemStack(Material.WOOD_AXE)
-                },
-                new ItemStack(Material.GOLD_NUGGET)
-        );
+        armorItems = new ItemStack[] {
+                new ItemStack(Material.LEATHER_HELMET),
+                new ItemStack(Material.LEATHER_CHESTPLATE),
+                new ItemStack(Material.LEATHER_LEGGINGS),
+                new ItemStack(Material.LEATHER_BOOTS)
+        };
+
+    }
+
+    @Override
+    protected void setToolItems() {
+
+        toolItems = new ItemStack[] {
+                new ItemStack(Material.STONE_PICKAXE),
+                new ItemStack(Material.WOOD_SWORD),
+                new ItemStack(Material.WOOD_AXE)
+        };
+
+    }
+
+    @Override
+    protected void setSpecialItem() {
+
+        specialItem = new ItemStack(Material.GOLD_NUGGET);
 
     }
 
