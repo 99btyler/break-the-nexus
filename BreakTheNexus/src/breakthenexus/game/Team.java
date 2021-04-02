@@ -120,7 +120,7 @@ public class Team {
     }
 
     public final String getInfo() {
-        return teamName.toUpperCase() + ": " + playerNames.size() + " players";
+        return teamName.toUpperCase() + ": " + playerNames.size() + " players @ " + nexus.getHealth();
     }
 
 }

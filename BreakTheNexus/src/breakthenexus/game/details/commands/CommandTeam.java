@@ -50,11 +50,11 @@ public class CommandTeam implements CommandExecutor {
 
                 case "view":
 
-                    commandSender.sendMessage("----");
+                    commandSender.sendMessage("");
                     for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
                         commandSender.sendMessage(team.getInfo());
                     }
-                    commandSender.sendMessage("----");
+                    commandSender.sendMessage("");
 
                     break;
 
