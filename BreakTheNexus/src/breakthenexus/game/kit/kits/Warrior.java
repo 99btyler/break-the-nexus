@@ -2,25 +2,24 @@ package breakthenexus.game.kit.kits;
 
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class Warrior extends Kit {
 
     @Override
-    protected void setToolItems() {
+    protected void setToolItemMaterials() {
 
-        toolItems = new ItemStack[] {
-                new ItemStack(Material.WOOD_PICKAXE),
-                new ItemStack(Material.STONE_SWORD),
-                new ItemStack(Material.WOOD_AXE)
+        toolItemMaterials = new Material[] {
+                Material.WOOD_PICKAXE,
+                Material.STONE_SWORD,
+                Material.WOOD_AXE
         };
 
     }
 
     @Override
-    protected void setSpecialItem() {
+    protected void setSpecialItemMaterial() {
 
-        specialItem = new ItemStack(Material.BLAZE_POWDER);
+        specialItemMaterial = Material.BLAZE_POWDER;
 
     }
 

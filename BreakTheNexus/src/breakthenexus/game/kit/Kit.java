@@ -1,18 +1,18 @@
 package breakthenexus.game.kit;
 
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.Material;
 
 public abstract class Kit {
 
     private final String kitName = getClass().getSimpleName();
 
-    protected ItemStack[] toolItems = null;
-    protected ItemStack specialItem = null;
+    protected Material[] toolItemMaterials = null;
+    protected Material specialItemMaterial = null;
 
     public Kit() {
 
-        setToolItems();
-        setSpecialItem();
+        setToolItemMaterials();
+        setSpecialItemMaterial();
 
     }
 
@@ -20,15 +20,15 @@ public abstract class Kit {
         return kitName;
     }
 
-    protected abstract void setToolItems();
-    protected abstract void setSpecialItem();
+    protected abstract void setToolItemMaterials();
+    protected abstract void setSpecialItemMaterial();
 
-    public final ItemStack[] getToolItems() {
-        return toolItems;
+    public final Material[] getToolItemMaterials() {
+        return toolItemMaterials;
     }
 
-    public final ItemStack getSpecialItem() {
-        return specialItem;
+    public final Material getSpecialItemMaterial() {
+        return specialItemMaterial;
     }
 
 }

@@ -2,26 +2,25 @@ package breakthenexus.game.kit.kits;
 
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 public class Civilian extends Kit {
 
     @Override
-    protected void setToolItems() {
+    protected void setToolItemMaterials() {
 
-        toolItems = new ItemStack[] {
-                new ItemStack(Material.STONE_PICKAXE),
-                new ItemStack(Material.WOOD_SWORD),
-                new ItemStack(Material.STONE_AXE),
-                new ItemStack(Material.STONE_SPADE)
+        toolItemMaterials = new Material[] {
+                Material.STONE_PICKAXE,
+                Material.WOOD_SWORD,
+                Material.STONE_AXE,
+                Material.STONE_SPADE
         };
 
     }
 
     @Override
-    protected void setSpecialItem() {
+    protected void setSpecialItemMaterial() {
 
-        specialItem = new ItemStack(Material.CLAY_BRICK);
+        specialItemMaterial = Material.CLAY_BRICK;
 
     }
 

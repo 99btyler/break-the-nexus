@@ -65,12 +65,12 @@ public class KitManager {
                         player.getInventory().setArmorContents(armorItems);
 
                         // toolItems
-                        for (ItemStack toolItem : kit.getToolItems()) {
-                            player.getInventory().addItem(toolItem);
+                        for (Material toolItemMaterial : kit.getToolItemMaterials()) {
+                            player.getInventory().addItem(new ItemStack(toolItemMaterial));
                         }
 
                         // specialItem
-                        player.getInventory().addItem(kit.getSpecialItem());
+                        player.getInventory().addItem(new ItemStack(kit.getSpecialItemMaterial()));
 
                     }
                 }
