@@ -7,7 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,15 +58,6 @@ public class KitManager {
                 for (Kit kit : kits) {
                     if (kit.getKitName().equals(kitName)) {
 
-                        // armorItems
-                        final ItemStack[] armorItems = new ItemStack[] {
-                                new ItemStack(Material.LEATHER_BOOTS),
-                                new ItemStack(Material.LEATHER_LEGGINGS),
-                                new ItemStack(Material.LEATHER_CHESTPLATE),
-                                new ItemStack(Material.LEATHER_HELMET)
-                        };
-                        player.getInventory().setArmorContents(armorItems);
-
                         // toolItems
                         for (Material toolItemMaterial : kit.getToolItemMaterials()) {
 
@@ -74,12 +67,40 @@ public class KitManager {
                                 toolItem.addEnchantment(Enchantment.DIG_SPEED, 1);
                             }
 
+                            final ItemMeta toolItemMeta = toolItem.getItemMeta();
+                            toolItemMeta.setLore(Arrays.asList("§6Soulbound"));
+                            toolItem.setItemMeta(toolItemMeta);
+
                             player.getInventory().addItem(toolItem);
 
                         }
 
                         // specialItem
-                        player.getInventory().addItem(new ItemStack(kit.getSpecialItemMaterial()));
+                        final ItemStack specialItem = new ItemStack(kit.getSpecialItemMaterial());
+
+                        final ItemMeta specialItemMeta = specialItem.getItemMeta();
+                        specialItemMeta.setLore(Arrays.asList("§dSoulbound"));
+                        specialItem.setItemMeta(specialItemMeta);
+
+                        player.getInventory().addItem(specialItem);
+
+                        // armorItems
+                        final ItemStack[] armorItems = new ItemStack[] {
+                                new ItemStack(Material.LEATHER_BOOTS),
+                                new ItemStack(Material.LEATHER_LEGGINGS),
+                                new ItemStack(Material.LEATHER_CHESTPLATE),
+                                new ItemStack(Material.LEATHER_HELMET)
+                        };
+
+                        for (ItemStack armorItem : armorItems) {
+
+                            final ItemMeta armorItemMeta = armorItem.getItemMeta();
+                            armorItemMeta.setLore(Arrays.asList("§6Soulbound"));
+                            armorItem.setItemMeta(armorItemMeta);
+
+                        }
+
+                        player.getInventory().setArmorContents(armorItems);
 
                     }
                 }

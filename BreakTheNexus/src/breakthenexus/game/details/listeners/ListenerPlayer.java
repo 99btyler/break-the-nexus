@@ -4,14 +4,18 @@ import breakthenexus.BreakTheNexus;
 import breakthenexus.game.Mine;
 import breakthenexus.game.Team;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class ListenerPlayer implements Listener {
 
@@ -101,6 +105,34 @@ public class ListenerPlayer implements Listener {
                 return;
 
             }
+        }
+
+    }
+
+    @EventHandler
+    private void onPlayerDropItem(PlayerDropItemEvent playerDropItemEvent) {
+
+        final ItemStack itemStack = playerDropItemEvent.getItemDrop().getItemStack();
+        final ItemMeta itemStackMeta = itemStack.getItemMeta();
+
+        if (itemStackMeta.hasLore()) {
+
+            final String lore = itemStackMeta.getLore().get(0);
+            final Player player = playerDropItemEvent.getPlayer();
+
+            switch (lore) {
+
+                case "§6Soulbound":
+                    playerDropItemEvent.getItemDrop().remove();
+                    player.playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
+                    break;
+
+                case "§dSoulbound":
+                    playerDropItemEvent.setCancelled(true);
+                    break;
+
+            }
+
         }
 
     }
