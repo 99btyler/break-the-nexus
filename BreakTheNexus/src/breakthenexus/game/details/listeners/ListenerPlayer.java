@@ -11,11 +11,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ListenerPlayer implements Listener {
 
@@ -133,6 +137,35 @@ public class ListenerPlayer implements Listener {
 
             }
 
+        }
+
+    }
+
+    @EventHandler
+    private void onPlayerDeath(PlayerDeathEvent playerDeathEvent) {
+
+        final List<ItemStack> dropsToRemove = new ArrayList<>();
+
+        for (ItemStack drop : playerDeathEvent.getDrops()) {
+
+            final ItemMeta dropMeta = drop.getItemMeta();
+
+            if (dropMeta.hasLore()) {
+
+                final String lore = dropMeta.getLore().get(0);
+
+                if (lore.equals("§6Soulbound") || lore.equals("§dSoulbound")) {
+
+                    dropsToRemove.add(drop);
+
+                }
+
+            }
+
+        }
+
+        for (ItemStack dropToRemove : dropsToRemove) {
+            playerDeathEvent.getDrops().remove(dropToRemove);
         }
 
     }
