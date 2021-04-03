@@ -4,6 +4,7 @@ import breakthenexus.BreakTheNexus;
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -66,7 +67,15 @@ public class KitManager {
 
                         // toolItems
                         for (Material toolItemMaterial : kit.getToolItemMaterials()) {
-                            player.getInventory().addItem(new ItemStack(toolItemMaterial));
+
+                            final ItemStack toolItem = new ItemStack(toolItemMaterial);
+
+                            if (kitName.equals("Miner") && toolItemMaterial == Material.STONE_PICKAXE) {
+                                toolItem.addEnchantment(Enchantment.DIG_SPEED, 1);
+                            }
+
+                            player.getInventory().addItem(toolItem);
+
                         }
 
                         // specialItem
