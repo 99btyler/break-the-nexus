@@ -3,11 +3,13 @@ package breakthenexus.managers;
 import breakthenexus.BreakTheNexus;
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,7 +97,20 @@ public class KitManager {
                         for (ItemStack armorItem : armorItems) {
 
                             final ItemMeta armorItemMeta = armorItem.getItemMeta();
+
+                            Color color = null;
+                            switch (BreakTheNexus.getInstance().getTeamManager().getTeamNameByPlayer(player.getName())) {
+                                case "Red":
+                                    color = Color.RED;
+                                    break;
+                                case "Blue":
+                                    color = Color.BLUE;
+                                    break;
+                            }
+                            ((LeatherArmorMeta)armorItemMeta).setColor(color);
+
                             armorItemMeta.setLore(Arrays.asList("§6Soulbound"));
+
                             armorItem.setItemMeta(armorItemMeta);
 
                         }
