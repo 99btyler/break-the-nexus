@@ -7,18 +7,6 @@ import org.bukkit.inventory.ItemStack;
 public class Warrior extends Kit {
 
     @Override
-    protected void setArmorItems() {
-
-        armorItems = new ItemStack[] {
-                new ItemStack(Material.LEATHER_BOOTS),
-                new ItemStack(Material.LEATHER_LEGGINGS),
-                new ItemStack(Material.LEATHER_CHESTPLATE),
-                new ItemStack(Material.LEATHER_HELMET)
-        };
-
-    }
-
-    @Override
     protected void setToolItems() {
 
         toolItems = new ItemStack[] {

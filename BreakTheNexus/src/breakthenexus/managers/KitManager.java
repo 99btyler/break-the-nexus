@@ -3,6 +3,7 @@ package breakthenexus.managers;
 import breakthenexus.BreakTheNexus;
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,11 +34,11 @@ public class KitManager {
             if (kit.getKitName().equalsIgnoreCase(kitName)) {
 
                 kitUsers.put(playerName, kit.getKitName());
-                return true; // Update succeeded
+                return true;
 
             }
         }
-        return false; // Update failed
+        return false;
     }
 
     public final void giveKitItemsTo(String playerName) {
@@ -54,12 +55,21 @@ public class KitManager {
                 for (Kit kit : kits) {
                     if (kit.getKitName().equals(kitName)) {
 
-                        player.getInventory().setArmorContents(kit.getArmorItems());
+                        // armorItems
+                        final ItemStack[] armorItems = new ItemStack[] {
+                                new ItemStack(Material.LEATHER_BOOTS),
+                                new ItemStack(Material.LEATHER_LEGGINGS),
+                                new ItemStack(Material.LEATHER_CHESTPLATE),
+                                new ItemStack(Material.LEATHER_HELMET)
+                        };
+                        player.getInventory().setArmorContents(armorItems);
 
+                        // toolItems
                         for (ItemStack toolItem : kit.getToolItems()) {
                             player.getInventory().addItem(toolItem);
                         }
 
+                        // specialItem
                         player.getInventory().addItem(kit.getSpecialItem());
 
                     }
