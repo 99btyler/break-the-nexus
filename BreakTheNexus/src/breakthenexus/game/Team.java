@@ -2,7 +2,6 @@ package breakthenexus.game;
 
 import breakthenexus.BreakTheNexus;
 import org.bukkit.*;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,10 +97,8 @@ public class Team {
 
             nexus.getLocation().getBlock().setType(Material.BEDROCK);
 
-            for (Player player : nexus.getLocation().getWorld().getPlayers()) {
-                player.playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
-                player.sendMessage(teamName + " has been destroyed!");
-            }
+            BreakTheNexus.getInstance().getMapGame().getWorld().playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
+            BreakTheNexus.getInstance().getServer().broadcastMessage(teamName + " has been destroyed!");
 
             spawnpoints.clear();
             spawnpoints.add(BreakTheNexus.getInstance().getMapLobby().getWorld().getSpawnLocation());
@@ -112,10 +109,8 @@ public class Team {
 
         }
 
-        for (Player player : nexus.getLocation().getWorld().getPlayers()) {
-            player.playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0f, 0.1f);
-            player.sendMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
-        }
+        BreakTheNexus.getInstance().getMapGame().getWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
+        BreakTheNexus.getInstance().getServer().broadcastMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
 
     }
 

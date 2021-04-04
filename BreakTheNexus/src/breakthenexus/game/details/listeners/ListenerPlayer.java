@@ -128,7 +128,7 @@ public class ListenerPlayer implements Listener {
 
                 case "§6Soulbound":
                     playerDropItemEvent.getItemDrop().remove();
-                    player.playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
+                    BreakTheNexus.getInstance().getMapGame().getWorld().playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
                     break;
 
                 case "§dSoulbound":
