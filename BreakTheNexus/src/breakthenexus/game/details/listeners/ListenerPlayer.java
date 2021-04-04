@@ -53,7 +53,8 @@ public class ListenerPlayer implements Listener {
 
         if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
 
-            // For some reason,
+            // For some reason, player is briefly null after PlayerRespawnEvent.
+            // This seems to be a Bukkit thing. My workaround: wait 1 second
             final BreakTheNexus breakTheNexus = BreakTheNexus.getInstance();
             breakTheNexus.getServer().getScheduler().runTaskLater(breakTheNexus, new Runnable() {
                 @Override
