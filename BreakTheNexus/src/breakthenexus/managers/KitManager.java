@@ -70,6 +70,7 @@ public class KitManager {
                             }
 
                             final ItemMeta toolItemMeta = toolItem.getItemMeta();
+                            toolItemMeta.setDisplayName("Soulbound Tool");
                             toolItemMeta.setLore(Arrays.asList("§6Soulbound"));
                             toolItem.setItemMeta(toolItemMeta);
 
@@ -81,7 +82,8 @@ public class KitManager {
                         final ItemStack specialItem = new ItemStack(kit.getSpecialItemMaterial());
 
                         final ItemMeta specialItemMeta = specialItem.getItemMeta();
-                        specialItemMeta.setLore(Arrays.asList("§dSoulbound"));
+                        specialItemMeta.setDisplayName("Special Item");
+                        specialItemMeta.setLore(Arrays.asList("§dSpecial"));
                         specialItem.setItemMeta(specialItemMeta);
 
                         player.getInventory().addItem(specialItem);
@@ -109,6 +111,7 @@ public class KitManager {
                             }
                             ((LeatherArmorMeta)armorItemMeta).setColor(color);
 
+                            armorItemMeta.setDisplayName("Soulbound Armor");
                             armorItemMeta.setLore(Arrays.asList("§6Soulbound"));
 
                             armorItem.setItemMeta(armorItemMeta);

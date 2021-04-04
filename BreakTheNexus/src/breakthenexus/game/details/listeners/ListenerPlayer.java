@@ -131,7 +131,7 @@ public class ListenerPlayer implements Listener {
                     BreakTheNexus.getInstance().getMapGame().getWorld().playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
                     break;
 
-                case "§dSoulbound":
+                case "§dSpecial":
                     playerDropItemEvent.setCancelled(true);
                     break;
 
@@ -154,7 +154,7 @@ public class ListenerPlayer implements Listener {
 
                 final String lore = dropMeta.getLore().get(0);
 
-                if (lore.equals("§6Soulbound") || lore.equals("§dSoulbound")) {
+                if (lore.equals("§6Soulbound") || lore.equals("§dSpecial")) {
 
                     dropsToRemove.add(drop);
 
