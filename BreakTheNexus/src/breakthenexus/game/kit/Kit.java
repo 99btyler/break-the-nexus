@@ -1,6 +1,7 @@
 package breakthenexus.game.kit;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public abstract class Kit {
 
@@ -20,15 +21,18 @@ public abstract class Kit {
         return kitName;
     }
 
-    protected abstract void setToolItemMaterials();
-    protected abstract void setSpecialItemMaterial();
-
     public final Material[] getToolItemMaterials() {
         return toolItemMaterials;
     }
 
+    protected abstract void setToolItemMaterials();
+
     public final Material getSpecialItemMaterial() {
         return specialItemMaterial;
     }
+
+    protected abstract void setSpecialItemMaterial();
+
+    public abstract void doSpecial(Player player);
 
 }

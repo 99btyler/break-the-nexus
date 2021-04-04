@@ -2,6 +2,7 @@ package breakthenexus.game.kit.kits;
 
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class Warrior extends Kit {
 
@@ -20,6 +21,13 @@ public class Warrior extends Kit {
     protected void setSpecialItemMaterial() {
 
         specialItemMaterial = Material.BLAZE_POWDER;
+
+    }
+
+    @Override
+    public void doSpecial(Player player) {
+
+        // TODO: Warrior special ability
 
     }
 

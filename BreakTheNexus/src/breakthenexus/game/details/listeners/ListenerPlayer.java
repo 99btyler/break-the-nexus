@@ -8,11 +8,13 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -109,6 +111,29 @@ public class ListenerPlayer implements Listener {
                 return;
 
             }
+        }
+
+    }
+
+    @EventHandler
+    private void onPlayerInteract(PlayerInteractEvent playerInteractEvent) {
+
+        if (playerInteractEvent.getAction() == Action.RIGHT_CLICK_AIR) {
+
+            final ItemMeta itemMeta = playerInteractEvent.getItem().getItemMeta();
+
+            if (itemMeta.hasLore()) {
+
+                final String lore = itemMeta.getLore().get(0);
+
+                if (lore.equals("§dSpecial")) {
+
+                    BreakTheNexus.getInstance().getKitManager().handleDoSpecial(playerInteractEvent.getPlayer());
+
+                }
+
+            }
+
         }
 
     }

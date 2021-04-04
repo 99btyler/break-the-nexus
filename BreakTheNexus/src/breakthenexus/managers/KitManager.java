@@ -128,4 +128,18 @@ public class KitManager {
 
     }
 
+    public final void handleDoSpecial(Player player) {
+
+        final String kitName = getKitNameUsedBy(player.getName());
+
+        for (Kit kit : kits) {
+            if (kit.getKitName().equals(kitName)) {
+
+                kit.doSpecial(player);
+
+            }
+        }
+
+    }
+
 }

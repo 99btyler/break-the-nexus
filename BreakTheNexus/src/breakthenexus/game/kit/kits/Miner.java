@@ -2,6 +2,7 @@ package breakthenexus.game.kit.kits;
 
 import breakthenexus.game.kit.Kit;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class Miner extends Kit {
 
@@ -20,6 +21,13 @@ public class Miner extends Kit {
     protected void setSpecialItemMaterial() {
 
         specialItemMaterial = Material.GOLD_NUGGET;
+
+    }
+
+    @Override
+    public void doSpecial(Player player) {
+
+        // TODO: Miner special ability
 
     }
 
