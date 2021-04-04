@@ -1,6 +1,7 @@
-package breakthenexus.game;
+package breakthenexus.game.team;
 
 import breakthenexus.BreakTheNexus;
+import breakthenexus.game.Nexus;
 import org.bukkit.*;
 
 import java.util.ArrayList;

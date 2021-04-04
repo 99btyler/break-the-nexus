@@ -1,4 +1,4 @@
-package breakthenexus.game;
+package breakthenexus.game.mine;
 
 import breakthenexus.BreakTheNexus;
 import org.bukkit.Bukkit;

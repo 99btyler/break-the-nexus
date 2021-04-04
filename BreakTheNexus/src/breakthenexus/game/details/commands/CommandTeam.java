@@ -1,7 +1,7 @@
 package breakthenexus.game.details.commands;
 
 import breakthenexus.BreakTheNexus;
-import breakthenexus.game.Team;
+import breakthenexus.game.team.Team;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

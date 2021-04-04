@@ -1,6 +1,4 @@
-package breakthenexus.managers;
-
-import breakthenexus.game.Mine;
+package breakthenexus.game.mine;
 
 public class MineManager {
 

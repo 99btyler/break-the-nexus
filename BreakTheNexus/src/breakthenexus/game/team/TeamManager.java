@@ -1,6 +1,4 @@
-package breakthenexus.managers;
-
-import breakthenexus.game.Team;
+package breakthenexus.game.team;
 
 public class TeamManager {
 

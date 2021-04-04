@@ -1,8 +1,8 @@
 package breakthenexus.game.details.listeners;
 
 import breakthenexus.BreakTheNexus;
-import breakthenexus.game.Mine;
-import breakthenexus.game.Team;
+import breakthenexus.game.mine.Mine;
+import breakthenexus.game.team.Team;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

@@ -1,8 +1,6 @@
 package breakthenexus;
 
 import breakthenexus.game.Map;
-import breakthenexus.game.Mine;
-import breakthenexus.game.Team;
 import breakthenexus.game.details.commands.CommandKit;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
@@ -12,8 +10,10 @@ import breakthenexus.game.kit.KitManager;
 import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
-import breakthenexus.managers.MineManager;
-import breakthenexus.managers.TeamManager;
+import breakthenexus.game.mine.Mine;
+import breakthenexus.game.mine.MineManager;
+import breakthenexus.game.team.Team;
+import breakthenexus.game.team.TeamManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
