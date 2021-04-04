@@ -53,7 +53,14 @@ public class ListenerPlayer implements Listener {
 
         if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
 
-            BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(player.getName());
+            // For some reason,
+            final BreakTheNexus breakTheNexus = BreakTheNexus.getInstance();
+            breakTheNexus.getServer().getScheduler().runTaskLater(breakTheNexus, new Runnable() {
+                @Override
+                public void run() {
+                    breakTheNexus.getKitManager().giveKitItemsTo(player.getName());
+                }
+            }, 20 * 1); // 20 ticks = 1 second
 
         }
 
@@ -118,22 +125,20 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onPlayerInteract(PlayerInteractEvent playerInteractEvent) {
 
-        if (playerInteractEvent.getAction() == Action.RIGHT_CLICK_AIR) {
+        final Action action = playerInteractEvent.getAction();
 
-            final ItemMeta itemMeta = playerInteractEvent.getItem().getItemMeta();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) {
+            return;
+        }
 
-            if (itemMeta.hasLore()) {
+        final ItemMeta itemStackMeta = playerInteractEvent.getItem().getItemMeta();
 
-                final String lore = itemMeta.getLore().get(0);
+        if (!itemStackMeta.hasLore()) {
+            return;
+        }
 
-                if (lore.equals("§dSpecial")) {
-
-                    BreakTheNexus.getInstance().getKitManager().handleDoSpecial(playerInteractEvent.getPlayer());
-
-                }
-
-            }
-
+        if (itemStackMeta.getLore().contains("§dSpecial")) {
+            BreakTheNexus.getInstance().getKitManager().handleDoSpecial(playerInteractEvent.getPlayer());
         }
 
     }
@@ -141,26 +146,20 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onPlayerDropItem(PlayerDropItemEvent playerDropItemEvent) {
 
-        final ItemStack itemStack = playerDropItemEvent.getItemDrop().getItemStack();
-        final ItemMeta itemStackMeta = itemStack.getItemMeta();
+        final ItemMeta itemStackMeta = playerDropItemEvent.getItemDrop().getItemStack().getItemMeta();
 
-        if (itemStackMeta.hasLore()) {
+        if (!itemStackMeta.hasLore()) {
+            return;
+        }
 
-            final String lore = itemStackMeta.getLore().get(0);
-            final Player player = playerDropItemEvent.getPlayer();
+        if (itemStackMeta.getLore().contains("§6Soulbound")) {
 
-            switch (lore) {
+            playerDropItemEvent.getItemDrop().remove();
+            BreakTheNexus.getInstance().getMapGame().getWorld().playSound(playerDropItemEvent.getPlayer().getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
 
-                case "§6Soulbound":
-                    playerDropItemEvent.getItemDrop().remove();
-                    BreakTheNexus.getInstance().getMapGame().getWorld().playSound(player.getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
-                    break;
+        } else if (itemStackMeta.getLore().contains("§dSpecial")) {
 
-                case "§dSpecial":
-                    playerDropItemEvent.setCancelled(true);
-                    break;
-
-            }
+            playerDropItemEvent.setCancelled(true);
 
         }
 
@@ -175,16 +174,12 @@ public class ListenerPlayer implements Listener {
 
             final ItemMeta dropMeta = drop.getItemMeta();
 
-            if (dropMeta.hasLore()) {
+            if (!dropMeta.hasLore()) {
+                continue;
+            }
 
-                final String lore = dropMeta.getLore().get(0);
-
-                if (lore.equals("§6Soulbound") || lore.equals("§dSpecial")) {
-
-                    dropsToRemove.add(drop);
-
-                }
-
+            if (dropMeta.getLore().contains("§6Soulbound") || dropMeta.getLore().contains("§dSpecial")) {
+                dropsToRemove.add(drop);
             }
 
         }

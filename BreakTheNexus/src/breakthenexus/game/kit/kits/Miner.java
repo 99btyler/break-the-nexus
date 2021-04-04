@@ -6,28 +6,23 @@ import org.bukkit.entity.Player;
 
 public class Miner extends Kit {
 
-    @Override
-    protected void setToolItemMaterials() {
+    public Miner() {
 
-        toolItemMaterials = new Material[] {
-                Material.STONE_PICKAXE,
-                Material.WOOD_SWORD,
-                Material.WOOD_AXE
-        };
-
-    }
-
-    @Override
-    protected void setSpecialItemMaterial() {
-
-        specialItemMaterial = Material.GOLD_NUGGET;
+        super(
+                new Material[] {
+                      Material.STONE_PICKAXE,
+                      Material.WOOD_SWORD,
+                      Material.WOOD_AXE
+                },
+                Material.GOLD_NUGGET
+        );
 
     }
 
     @Override
     public void doSpecial(Player player) {
 
-        // TODO: Miner special ability
+        // TODO: Civilian special ability
 
     }
 

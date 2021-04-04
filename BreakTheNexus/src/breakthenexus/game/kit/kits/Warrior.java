@@ -6,28 +6,23 @@ import org.bukkit.entity.Player;
 
 public class Warrior extends Kit {
 
-    @Override
-    protected void setToolItemMaterials() {
+    public Warrior() {
 
-        toolItemMaterials = new Material[] {
-                Material.WOOD_PICKAXE,
-                Material.STONE_SWORD,
-                Material.WOOD_AXE
-        };
-
-    }
-
-    @Override
-    protected void setSpecialItemMaterial() {
-
-        specialItemMaterial = Material.BLAZE_POWDER;
+        super(
+                new Material[] {
+                        Material.WOOD_PICKAXE,
+                        Material.STONE_SWORD,
+                        Material.WOOD_AXE
+                },
+                Material.BLAZE_POWDER
+        );
 
     }
 
     @Override
     public void doSpecial(Player player) {
 
-        // TODO: Warrior special ability
+        // TODO: Civilian special ability
 
     }
 

@@ -6,22 +6,17 @@ import org.bukkit.entity.Player;
 
 public class Civilian extends Kit {
 
-    @Override
-    protected void setToolItemMaterials() {
+    public Civilian() {
 
-        toolItemMaterials = new Material[] {
-                Material.STONE_PICKAXE,
-                Material.WOOD_SWORD,
-                Material.STONE_AXE,
-                Material.STONE_SPADE
-        };
-
-    }
-
-    @Override
-    protected void setSpecialItemMaterial() {
-
-        specialItemMaterial = Material.CLAY_BRICK;
+        super(
+                new Material[] {
+                       Material.STONE_PICKAXE,
+                       Material.WOOD_SWORD,
+                       Material.STONE_AXE,
+                       Material.STONE_SPADE
+                },
+                Material.CLAY_BRICK
+        );
 
     }
 

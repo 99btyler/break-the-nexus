@@ -7,31 +7,25 @@ public abstract class Kit {
 
     private final String kitName = getClass().getSimpleName();
 
-    protected Material[] toolItemMaterials = null;
-    protected Material specialItemMaterial = null;
+    private final Material[] tools;
+    private final Material specialItem;
 
-    public Kit() {
-
-        setToolItemMaterials();
-        setSpecialItemMaterial();
-
+    public Kit(Material[] tools, Material specialItem) {
+        this.tools = tools;
+        this.specialItem = specialItem;
     }
 
     public final String getKitName() {
         return kitName;
     }
 
-    public final Material[] getToolItemMaterials() {
-        return toolItemMaterials;
+    public final Material[] getTools() {
+        return tools;
     }
 
-    protected abstract void setToolItemMaterials();
-
-    public final Material getSpecialItemMaterial() {
-        return specialItemMaterial;
+    public final Material getSpecialItem() {
+        return specialItem;
     }
-
-    protected abstract void setSpecialItemMaterial();
 
     public abstract void doSpecial(Player player);
 
