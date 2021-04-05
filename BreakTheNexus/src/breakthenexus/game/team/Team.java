@@ -98,6 +98,7 @@ public class Team {
 
             nexus.getLocation().getBlock().setType(Material.BEDROCK);
 
+            nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.EXPLOSION_HUGE, 0);
             BreakTheNexus.getInstance().getMapGame().getWorld().playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
             BreakTheNexus.getInstance().getServer().broadcastMessage(teamName + " has been destroyed!");
 
@@ -110,6 +111,8 @@ public class Team {
 
         }
 
+        nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.LARGE_SMOKE, 0);
+        nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.CLOUD, 0);
         BreakTheNexus.getInstance().getMapGame().getWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
         BreakTheNexus.getInstance().getServer().broadcastMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
 

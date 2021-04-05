@@ -4,6 +4,7 @@ import breakthenexus.BreakTheNexus;
 import breakthenexus.game.kit.Kit;
 import breakthenexus.game.team.Team;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -37,6 +38,8 @@ public class Civilian extends Kit {
 
                 potentialTeammate.setFoodLevel(20);
                 potentialTeammate.setSaturation(5.0f);
+
+                potentialTeammate.getWorld().playEffect(potentialTeammate.getLocation().add(0, 2, 0), Effect.HEART, 0);
                 potentialTeammate.sendMessage(ChatColor.LIGHT_PURPLE + player.getName() + " has restored your hunger!");
 
             }
