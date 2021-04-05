@@ -1,8 +1,11 @@
 package breakthenexus.game.kit.kits;
 
 import breakthenexus.game.kit.Kit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Miner extends Kit {
 
@@ -22,7 +25,8 @@ public class Miner extends Kit {
     @Override
     public void doSpecial(Player player) {
 
-        // TODO: Civilian special ability
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, (20 * 15), 0));
+        player.sendMessage(ChatColor.LIGHT_PURPLE + "You now have Haste for 15 seconds!");
 
     }
 
