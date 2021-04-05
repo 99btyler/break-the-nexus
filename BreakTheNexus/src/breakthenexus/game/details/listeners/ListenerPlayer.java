@@ -132,7 +132,13 @@ public class ListenerPlayer implements Listener {
             return;
         }
 
-        final ItemMeta itemStackMeta = playerInteractEvent.getItem().getItemMeta();
+        final ItemStack itemStack = playerInteractEvent.getItem();
+
+        if (itemStack == null) {
+            return;
+        }
+
+        final ItemMeta itemStackMeta = itemStack.getItemMeta();
 
         if (!itemStackMeta.hasLore()) {
             return;
