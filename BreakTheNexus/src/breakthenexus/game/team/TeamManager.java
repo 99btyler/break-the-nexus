@@ -12,10 +12,10 @@ public class TeamManager {
         return teams;
     }
 
-    public final String getTeamNameByPlayer(String playerName) {
+    public final Team getTeamByPlayer(String playerName) {
         for (Team team : teams) {
             if (team.hasPlayer(playerName)) {
-                return team.getTeamName();
+                return team;
             }
         }
         return null;

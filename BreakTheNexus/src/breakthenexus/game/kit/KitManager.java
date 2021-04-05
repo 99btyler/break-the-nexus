@@ -100,7 +100,7 @@ public class KitManager {
                     final ItemMeta armorItemMeta = armorItem.getItemMeta();
 
                     Color color = null;
-                    switch (BreakTheNexus.getInstance().getTeamManager().getTeamNameByPlayer(player.getName())) {
+                    switch (BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName()).getTeamName()) {
                         case "Red":
                             color = Color.RED;
                             break;
