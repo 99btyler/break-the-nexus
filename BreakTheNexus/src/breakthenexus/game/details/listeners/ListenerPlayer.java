@@ -13,10 +13,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -27,6 +24,8 @@ public class ListenerPlayer implements Listener {
 
     @EventHandler
     private void onPlayerJoin(PlayerJoinEvent playerJoinEvent) {
+
+        playerJoinEvent.setJoinMessage(null);
 
         final Player player = playerJoinEvent.getPlayer();
         final Location placeToSpawn = BreakTheNexus.getInstance().getPlaceToSpawn(player.getName());
@@ -40,6 +39,13 @@ public class ListenerPlayer implements Listener {
             player.setFoodLevel(20);
 
         }
+
+    }
+
+    @EventHandler
+    private void onPlayerQuit(PlayerQuitEvent playerQuitEvent) {
+
+        playerQuitEvent.setQuitMessage(null);
 
     }
 
