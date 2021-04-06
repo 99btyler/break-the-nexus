@@ -50,6 +50,9 @@ public class Mine {
 
     public final void handleBlockBreakEvent(BlockBreakEvent blockBreakEvent) {
 
+        // For logs (storing original direction)
+        final byte blockData = blockBreakEvent.getBlock().getData();
+
         blockBreakEvent.getBlock().setType(Material.BEDROCK);
         blockBreakEvent.getPlayer().getInventory().addItem(new ItemStack(materialOutput, materialOutputAmount));
 
@@ -58,6 +61,10 @@ public class Mine {
             public void run() {
 
                 blockBreakEvent.getBlock().setType(material);
+
+                if (material == Material.LOG) {
+                    blockBreakEvent.getBlock().setData(blockData);
+                }
 
             }
         }, 20 * blockRespawnDelay); // 20 ticks = 1 second
