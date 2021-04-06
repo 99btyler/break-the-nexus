@@ -1,6 +1,5 @@
 package breakthenexus;
 
-import breakthenexus.game.Map;
 import breakthenexus.game.details.commands.CommandKit;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
@@ -10,22 +9,21 @@ import breakthenexus.game.kit.KitManager;
 import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
+import breakthenexus.game.map.Map;
+import breakthenexus.game.map.MapManager;
 import breakthenexus.game.mine.Mine;
 import breakthenexus.game.mine.MineManager;
 import breakthenexus.game.team.Team;
 import breakthenexus.game.team.TeamManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
 
     private static BreakTheNexus instance;
 
-    private Map mapLobby;
-    private Map mapGame;
-
+    private MapManager mapManager;
     private TeamManager teamManager;
     private MineManager mineManager;
     private KitManager kitManager;
@@ -35,11 +33,10 @@ public class BreakTheNexus extends JavaPlugin {
 
         instance = this;
 
-        mapLobby = new Map("The Lobby");
-        mapLobby.loadWorld();
-
-        mapGame = new Map("Roastal");
-        mapGame.loadWorld();
+        mapManager = new MapManager(
+                new Map("The Lobby"),
+                new Map("Roastal")
+        );
 
         teamManager = new TeamManager(new Team[] {
                 new Team("Red"),
@@ -71,11 +68,7 @@ public class BreakTheNexus extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        for (Player player : mapGame.getWorld().getPlayers()) {
-            mapLobby.bringPlayer(player.getName());
-        }
-
-        mapGame.unloadWorld();
+        mapManager.unloadMaps();
 
     }
 
@@ -83,12 +76,8 @@ public class BreakTheNexus extends JavaPlugin {
         return instance;
     }
 
-    public final Map getMapLobby() {
-        return mapLobby;
-    }
-
-    public final Map getMapGame() {
-        return mapGame;
+    public final MapManager getMapManager() {
+        return mapManager;
     }
 
     public final TeamManager getTeamManager() {
@@ -109,7 +98,7 @@ public class BreakTheNexus extends JavaPlugin {
                 return team.getRandomSpawnpoint(); // In game world
             }
         }
-        return mapLobby.getWorld().getSpawnLocation(); // In lobby world
+        return mapManager.getLobbyWorld().getSpawnLocation(); // In lobby world
     }
 
 }

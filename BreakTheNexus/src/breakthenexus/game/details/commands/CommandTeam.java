@@ -33,7 +33,7 @@ public class CommandTeam implements CommandExecutor {
 
                         final Player player = (Player)commandSender;
 
-                        if (player.getWorld() == BreakTheNexus.getInstance().getMapGame().getWorld()) {
+                        if (player.getWorld() == BreakTheNexus.getInstance().getMapManager().getGameWorld()) {
                             player.sendMessage("You're already in the game");
                             break;
                         }
