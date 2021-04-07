@@ -2,11 +2,14 @@ package breakthenexus.game.gamemap;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GamemapManager {
 
@@ -14,6 +17,8 @@ public class GamemapManager {
     private final String worldsCloneFolder; // Will contain clones of the gamemaps, which will be played on and deleted
 
     private final Gamemap[] gamemaps;
+
+    private final Map<String, Location> disconnectLocations = new HashMap<>();
 
     public GamemapManager(Gamemap lobby, Gamemap game) {
 
@@ -67,6 +72,26 @@ public class GamemapManager {
 
     public final World getGameWorld() {
         return Bukkit.getWorld(worldsCloneFolder + gamemaps[1].getWorldFolderName());
+    }
+
+    public final Location getDisconnectLocation(String playerName) {
+
+        final Location disconnectLocation = disconnectLocations.get(playerName);
+        if (disconnectLocation == null) {
+
+            return null;
+
+        } else {
+
+            disconnectLocations.remove(playerName);
+            return disconnectLocation;
+
+        }
+
+    }
+
+    public final void saveDisconnectLocation(String playerName, Location location) {
+        disconnectLocations.put(playerName, location);
     }
 
 }

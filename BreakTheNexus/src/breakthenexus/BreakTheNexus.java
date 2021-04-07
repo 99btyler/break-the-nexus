@@ -93,12 +93,24 @@ public class BreakTheNexus extends JavaPlugin {
     }
 
     public final Location getPlaceToSpawn(String playerName) {
+
+        final Location disconnectLocation = gamemapManager.getDisconnectLocation(playerName);
+        if (disconnectLocation != null) {
+
+            return disconnectLocation;
+
+        }
+
         for (Team team : teamManager.getTeams()) {
             if (team.hasPlayer(playerName)) {
-                return team.getRandomSpawnpoint(); // In game world
+
+                return team.getRandomSpawnpoint();
+
             }
         }
-        return gamemapManager.getLobbyWorld().getSpawnLocation(); // In lobby world
+
+        return gamemapManager.getLobbyWorld().getSpawnLocation();
+
     }
 
 }

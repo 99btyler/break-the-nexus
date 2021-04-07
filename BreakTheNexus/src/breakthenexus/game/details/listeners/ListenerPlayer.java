@@ -47,6 +47,8 @@ public class ListenerPlayer implements Listener {
 
         playerQuitEvent.setQuitMessage(null);
 
+        BreakTheNexus.getInstance().getGamemapManager().saveDisconnectLocation(playerQuitEvent.getPlayer().getName(), playerQuitEvent.getPlayer().getLocation());
+
     }
 
     @EventHandler
