@@ -19,6 +19,7 @@ public class KitManager {
     private final Kit[] kits;
 
     private final Map<String, String> kitUsers = new HashMap<>(); // key = playerName, value = kitName
+    private final Map<String, Boolean> cooldowns = new HashMap<>(); // key = playerName, value = isOnCooldown
 
     public KitManager(Kit[] kits) {
         this.kits = kits;
@@ -38,6 +39,7 @@ public class KitManager {
             if (kit.getKitName().equalsIgnoreCase(kitName)) {
 
                 kitUsers.put(playerName, kit.getKitName());
+                cooldowns.put(playerName, false);
                 return true;
 
             }
@@ -126,12 +128,20 @@ public class KitManager {
 
     public final void handleDoSpecial(Player player) {
 
+        if (cooldowns.get(player.getName())) {
+            player.sendMessage("30 second cooldown is still active");
+            return;
+        }
+
         final String kitName = kitUsers.get(player.getName());
 
         for (Kit kit : kits) {
             if (kit.getKitName().equals(kitName)) {
 
                 kit.doSpecial(player);
+
+                cooldowns.put(player.getName(), true);
+                Bukkit.getServer().getScheduler().runTaskLater(BreakTheNexus.getInstance(), () -> cooldowns.put(player.getName(), false), 20 * 30); // 20 ticks = 1 second
 
             }
         }
