@@ -1,8 +1,8 @@
-package breakthenexus.game.details.listeners;
+package com.gmail._99tylerberinger.breakthenexus.game.details.listeners;
 
-import breakthenexus.BreakTheNexus;
-import breakthenexus.game.mine.Mine;
-import breakthenexus.game.team.Team;
+import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
+import com.gmail._99tylerberinger.breakthenexus.game.mine.Mine;
+import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

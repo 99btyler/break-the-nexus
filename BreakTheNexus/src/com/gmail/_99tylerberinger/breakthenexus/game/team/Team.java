@@ -1,7 +1,7 @@
-package breakthenexus.game.team;
+package com.gmail._99tylerberinger.breakthenexus.game.team;
 
-import breakthenexus.BreakTheNexus;
-import breakthenexus.game.Nexus;
+import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
+import com.gmail._99tylerberinger.breakthenexus.game.Nexus;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 

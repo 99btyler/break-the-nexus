@@ -1,4 +1,4 @@
-package breakthenexus.game.team;
+package com.gmail._99tylerberinger.breakthenexus.game.team;
 
 public class TeamManager {
 

@@ -1,4 +1,4 @@
-package breakthenexus.game;
+package com.gmail._99tylerberinger.breakthenexus.game;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

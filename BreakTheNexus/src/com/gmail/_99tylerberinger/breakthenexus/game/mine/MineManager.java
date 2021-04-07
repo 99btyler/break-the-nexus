@@ -1,4 +1,4 @@
-package breakthenexus.game.mine;
+package com.gmail._99tylerberinger.breakthenexus.game.mine;
 
 public class MineManager {
 

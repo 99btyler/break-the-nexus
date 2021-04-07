@@ -1,7 +1,7 @@
-package breakthenexus.game.details.commands;
+package com.gmail._99tylerberinger.breakthenexus.game.details.commands;
 
-import breakthenexus.BreakTheNexus;
-import breakthenexus.game.team.Team;
+import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
+import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

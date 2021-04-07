@@ -1,4 +1,4 @@
-package breakthenexus.game.gamemap;
+package com.gmail._99tylerberinger.breakthenexus.game.gamemap;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;

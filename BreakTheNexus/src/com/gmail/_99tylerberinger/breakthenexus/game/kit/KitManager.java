@@ -1,6 +1,6 @@
-package breakthenexus.game.kit;
+package com.gmail._99tylerberinger.breakthenexus.game.kit;
 
-import breakthenexus.BreakTheNexus;
+import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

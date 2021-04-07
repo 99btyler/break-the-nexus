@@ -1,4 +1,4 @@
-package breakthenexus.game.kit;
+package com.gmail._99tylerberinger.breakthenexus.game.kit;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
