@@ -36,9 +36,9 @@ public class KitManager {
     public final boolean updateKitUsers(String playerName, String kitName) {
 
         for (Kit kit : kits) {
-            if (kit.getKitName().equalsIgnoreCase(kitName)) {
+            if (kit.getName().equalsIgnoreCase(kitName)) {
 
-                kitUsers.put(playerName, kit.getKitName());
+                kitUsers.put(playerName, kit.getName());
                 cooldowns.put(playerName, false);
                 return true;
 
@@ -55,30 +55,30 @@ public class KitManager {
         final String kitName = kitUsers.get(player.getName());
 
         for (Kit kit : kits) {
-            if (kit.getKitName().equals(kitName)) {
+            if (kit.getName().equals(kitName)) {
 
                 // tools
-                for (Material toolMaterial : kit.getTools()) {
+                for (Material toolItemMaterial : kit.getToolItemMaterials()) {
 
-                    final ItemStack tool = new ItemStack(toolMaterial);
+                    final ItemStack toolItem = new ItemStack(toolItemMaterial);
 
-                    if (kitName.equals("Miner") && toolMaterial == Material.STONE_PICKAXE) {
-                        tool.addEnchantment(Enchantment.DIG_SPEED, 1);
+                    if (kit.getName().equals("Miner") && toolItemMaterial == Material.STONE_PICKAXE) {
+                        toolItem.addEnchantment(Enchantment.DIG_SPEED, 1);
                     }
 
-                    final ItemMeta toolItemMeta = tool.getItemMeta();
+                    final ItemMeta toolItemMeta = toolItem.getItemMeta();
 
                     toolItemMeta.setDisplayName("Soulbound Tool");
                     toolItemMeta.setLore(Arrays.asList("§6Soulbound"));
 
-                    tool.setItemMeta(toolItemMeta);
+                    toolItem.setItemMeta(toolItemMeta);
 
-                    player.getInventory().addItem(tool);
+                    player.getInventory().addItem(toolItem);
 
                 }
 
                 // special item
-                final ItemStack specialItem = new ItemStack(kit.getSpecialItem());
+                final ItemStack specialItem = new ItemStack(kit.getSpecialItemMaterial());
 
                 final ItemMeta specialItemMeta = specialItem.getItemMeta();
 
@@ -101,15 +101,7 @@ public class KitManager {
 
                     final ItemMeta armorItemMeta = armorItem.getItemMeta();
 
-                    Color color = null;
-                    switch (BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName()).getTeamName()) {
-                        case "Red":
-                            color = Color.RED;
-                            break;
-                        case "Blue":
-                            color = Color.BLUE;
-                            break;
-                    }
+                    final Color color = BreakTheNexus.getInstance().getTeamManager().getTeamColorByPlayer(player.getName());
                     ((LeatherArmorMeta)armorItemMeta).setColor(color);
 
                     armorItemMeta.setDisplayName("Soulbound Armor");
@@ -136,7 +128,7 @@ public class KitManager {
         final String kitName = kitUsers.get(player.getName());
 
         for (Kit kit : kits) {
-            if (kit.getKitName().equals(kitName)) {
+            if (kit.getName().equals(kitName)) {
 
                 kit.doSpecial(player);
 

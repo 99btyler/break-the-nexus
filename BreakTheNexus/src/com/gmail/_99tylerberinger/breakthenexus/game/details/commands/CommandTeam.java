@@ -13,7 +13,9 @@ public class CommandTeam implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
         if (args.length == 0) {
+
             commandSender.sendMessage("/team [join|view]");
+
         } else {
 
             switch (args[0].toLowerCase()) {
@@ -39,8 +41,10 @@ public class CommandTeam implements CommandExecutor {
                         }
 
                         for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
-                            if (team.getTeamName().equalsIgnoreCase(args[1])) {
+                            if (team.getName().equalsIgnoreCase(args[1])) {
+
                                 team.addPlayer(player.getName());
+
                             }
                         }
 

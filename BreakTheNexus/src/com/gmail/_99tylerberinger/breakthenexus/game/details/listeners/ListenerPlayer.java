@@ -47,7 +47,8 @@ public class ListenerPlayer implements Listener {
 
         playerQuitEvent.setQuitMessage(null);
 
-        BreakTheNexus.getInstance().getGamemapManager().saveDisconnectLocation(playerQuitEvent.getPlayer().getName(), playerQuitEvent.getPlayer().getLocation());
+        final Player player = playerQuitEvent.getPlayer();
+        BreakTheNexus.getInstance().getGamemapManager().saveDisconnectLocation(player.getName(), player.getLocation());
 
     }
 
@@ -91,10 +92,14 @@ public class ListenerPlayer implements Listener {
             entityDamageEvent.setCancelled(true);
         }
 
-        if (entityDamageEvent.getEntity() instanceof Player) {
-            if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
-                ((Player)entityDamageEvent.getEntity()).setHealth(0.0);
-            }
+        if (!(entityDamageEvent.getEntity() instanceof Player)) {
+            return;
+        }
+
+        final Player player = (Player)entityDamageEvent.getEntity();
+
+        if (entityDamageEvent.getCause() == EntityDamageEvent.DamageCause.VOID) {
+            player.setHealth(0.0);
         }
 
     }

@@ -5,26 +5,26 @@ import org.bukkit.entity.Player;
 
 public abstract class Kit {
 
-    private final String kitName = getClass().getSimpleName();
+    private final String name = getClass().getSimpleName();
 
-    private final Material[] tools;
-    private final Material specialItem;
+    private final Material[] toolItemMaterials;
+    private final Material specialItemMaterial;
 
-    public Kit(Material[] tools, Material specialItem) {
-        this.tools = tools;
-        this.specialItem = specialItem;
+    public Kit(Material[] toolItemMaterials, Material specialItemMaterial) {
+        this.toolItemMaterials = toolItemMaterials;
+        this.specialItemMaterial = specialItemMaterial;
     }
 
-    public final String getKitName() {
-        return kitName;
+    public final String getName() {
+        return name;
     }
 
-    public final Material[] getTools() {
-        return tools;
+    public final Material[] getToolItemMaterials() {
+        return toolItemMaterials;
     }
 
-    public final Material getSpecialItem() {
-        return specialItem;
+    public final Material getSpecialItemMaterial() {
+        return specialItemMaterial;
     }
 
     public abstract void doSpecial(Player player);

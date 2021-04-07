@@ -13,7 +13,9 @@ public class CommandKit implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
         if (args.length == 0) {
+
             commandSender.sendMessage("/kit [list|switch|view]");
+
         } else {
 
             switch (args[0].toLowerCase()) {
@@ -23,7 +25,7 @@ public class CommandKit implements CommandExecutor {
                     String kits = "";
 
                     for (Kit kit : BreakTheNexus.getInstance().getKitManager().getKits()) {
-                        kits += kit.getKitName() + ", ";
+                        kits += kit.getName() + ", ";
                     }
 
                     commandSender.sendMessage(kits);
