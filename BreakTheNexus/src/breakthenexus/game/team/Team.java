@@ -3,6 +3,7 @@ package breakthenexus.game.team;
 import breakthenexus.BreakTheNexus;
 import breakthenexus.game.Nexus;
 import org.bukkit.*;
+import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +21,14 @@ public class Team {
 
     private final Nexus nexus;
 
-    public Team(String teamName) {
+    public Team(String teamName, ConfigurationSection locations) {
 
         this.teamName = teamName;
         alive = true;
 
-        // TODO: automatically load spawnpoints from file instead
         final World gameWorld = BreakTheNexus.getInstance().getGamemapManager().getGameWorld();
+
+        // TODO: automatically load spawnpoints from file instead
         if (this.teamName.equals("Red")) {
             spawnpoints.add(new Location(gameWorld, -8.0, 20.0, 95.0, 180.0f, 0.0f));
             spawnpoints.add(new Location(gameWorld, 8.0, 20.0, 95.0, 180.0f, 0.0f));
@@ -37,16 +39,8 @@ public class Team {
             spawnpoints.add(new Location(gameWorld, 0.0, 20.0, -87.0, 0.0f, 0.0f));
         }
 
-        // TODO: automatically load nexus location from file instead
-        final Location location;
-        if (this.teamName.equals("Red")) {
-            location = new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), 0.0, 29.0, 95.0);
-        } else if (this.teamName.equals("Blue")) {
-            location = new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), 0.0, 29.0, -95.0);
-        } else {
-            location = null;
-        }
-        nexus = new Nexus(location);
+        final String[] locationsNexus = locations.getString(".nexus." + teamName).split(";");
+        nexus = new Nexus(new Location(gameWorld, Double.parseDouble(locationsNexus[0]), Double.parseDouble(locationsNexus[1]), Double.parseDouble(locationsNexus[2])));
 
     }
 

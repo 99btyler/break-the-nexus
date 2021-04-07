@@ -17,6 +17,7 @@ import breakthenexus.game.team.Team;
 import breakthenexus.game.team.TeamManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
@@ -38,9 +39,10 @@ public class BreakTheNexus extends JavaPlugin {
                 new Gamemap("Roastal")
         );
 
+        final ConfigurationSection locations = instance.getConfig().getConfigurationSection("locations");
         teamManager = new TeamManager(new Team[] {
-                new Team("Red"),
-                new Team("Blue")
+                new Team("Red", locations),
+                new Team("Blue", locations)
         });
 
         mineManager = new MineManager(new Mine[] {

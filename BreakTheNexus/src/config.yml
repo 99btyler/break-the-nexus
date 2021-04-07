@@ -1,0 +1,4 @@
+locations:
+  nexus:
+    Red: "0;10;95"
+    Blue: "0;10;-95"
