@@ -28,15 +28,9 @@ public class Team {
 
         final World gameWorld = BreakTheNexus.getInstance().getGamemapManager().getGameWorld();
 
-        // TODO: automatically load spawnpoints from file instead
-        if (this.teamName.equals("Red")) {
-            spawnpoints.add(new Location(gameWorld, -8.0, 20.0, 95.0, 180.0f, 0.0f));
-            spawnpoints.add(new Location(gameWorld, 8.0, 20.0, 95.0, 180.0f, 0.0f));
-            spawnpoints.add(new Location(gameWorld, 0.0, 20.0, 87.0, 180.0f, 0.0f));
-        } else if (this.teamName.equals("Blue")) {
-            spawnpoints.add(new Location(gameWorld, 8.0, 20.0, -95.0, 0.0f, 0.0f));
-            spawnpoints.add(new Location(gameWorld, -8.0, 20.0, -95.0, 0.0f, 0.0f));
-            spawnpoints.add(new Location(gameWorld, 0.0, 20.0, -87.0, 0.0f, 0.0f));
+        for (int i = 0; i < 3; i++) {
+            final String[] locationsSpawnpoint = locations.getString(".spawnpoints." + teamName + "." + i).split(";");
+            spawnpoints.add(new Location(gameWorld, Double.parseDouble(locationsSpawnpoint[0]), Double.parseDouble(locationsSpawnpoint[1]), Double.parseDouble(locationsSpawnpoint[2]), Float.parseFloat(locationsSpawnpoint[3]), Float.parseFloat(locationsSpawnpoint[4])));
         }
 
         final String[] locationsNexus = locations.getString(".nexus." + teamName).split(";");
