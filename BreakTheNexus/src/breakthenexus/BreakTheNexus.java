@@ -4,13 +4,13 @@ import breakthenexus.game.details.commands.CommandKit;
 import breakthenexus.game.details.commands.CommandTeam;
 import breakthenexus.game.details.listeners.ListenerPlayer;
 import breakthenexus.game.details.listeners.ListenerWorld;
+import breakthenexus.game.gamemap.Gamemap;
+import breakthenexus.game.gamemap.GamemapManager;
 import breakthenexus.game.kit.Kit;
 import breakthenexus.game.kit.KitManager;
 import breakthenexus.game.kit.kits.Civilian;
 import breakthenexus.game.kit.kits.Miner;
 import breakthenexus.game.kit.kits.Warrior;
-import breakthenexus.game.map.Map;
-import breakthenexus.game.map.MapManager;
 import breakthenexus.game.mine.Mine;
 import breakthenexus.game.mine.MineManager;
 import breakthenexus.game.team.Team;
@@ -23,7 +23,7 @@ public class BreakTheNexus extends JavaPlugin {
 
     private static BreakTheNexus instance;
 
-    private MapManager mapManager;
+    private GamemapManager gamemapManager;
     private TeamManager teamManager;
     private MineManager mineManager;
     private KitManager kitManager;
@@ -33,9 +33,9 @@ public class BreakTheNexus extends JavaPlugin {
 
         instance = this;
 
-        mapManager = new MapManager(
-                new Map("The Lobby"),
-                new Map("Roastal")
+        gamemapManager = new GamemapManager(
+                new Gamemap("The Lobby"),
+                new Gamemap("Roastal")
         );
 
         teamManager = new TeamManager(new Team[] {
@@ -68,7 +68,7 @@ public class BreakTheNexus extends JavaPlugin {
     @Override
     public void onDisable() {
 
-        mapManager.unloadMaps();
+        gamemapManager.unloadGamemaps();
 
     }
 
@@ -76,8 +76,8 @@ public class BreakTheNexus extends JavaPlugin {
         return instance;
     }
 
-    public final MapManager getMapManager() {
-        return mapManager;
+    public final GamemapManager getGamemapManager() {
+        return gamemapManager;
     }
 
     public final TeamManager getTeamManager() {
@@ -98,7 +98,7 @@ public class BreakTheNexus extends JavaPlugin {
                 return team.getRandomSpawnpoint(); // In game world
             }
         }
-        return mapManager.getLobbyWorld().getSpawnLocation(); // In lobby world
+        return gamemapManager.getLobbyWorld().getSpawnLocation(); // In lobby world
     }
 
 }

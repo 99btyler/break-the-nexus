@@ -1,10 +1,10 @@
-package breakthenexus.game.map;
+package breakthenexus.game.gamemap;
 
-public class Map {
+public class Gamemap {
 
     private final String worldFolderName;
 
-    public Map(String worldFolderName) {
+    public Gamemap(String worldFolderName) {
         this.worldFolderName = worldFolderName;
     }
 
