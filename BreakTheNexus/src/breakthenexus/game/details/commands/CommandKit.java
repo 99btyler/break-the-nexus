@@ -45,7 +45,7 @@ public class CommandKit implements CommandExecutor {
 
                         final Player player = (Player)commandSender;
 
-                        if (player.getWorld() == BreakTheNexus.getInstance().getMapManager().getLobbyWorld()) {
+                        if (player.getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
                             commandSender.sendMessage("You must be in game");
                             break;
                         }

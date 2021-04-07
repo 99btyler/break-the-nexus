@@ -26,7 +26,7 @@ public class Team {
         alive = true;
 
         // TODO: automatically load spawnpoints from file instead
-        final World gameWorld = BreakTheNexus.getInstance().getMapManager().getGameWorld();
+        final World gameWorld = BreakTheNexus.getInstance().getGamemapManager().getGameWorld();
         if (this.teamName.equals("Red")) {
             spawnpoints.add(new Location(gameWorld, -8.0, 20.0, 95.0, 180.0f, 0.0f));
             spawnpoints.add(new Location(gameWorld, 8.0, 20.0, 95.0, 180.0f, 0.0f));
@@ -40,9 +40,9 @@ public class Team {
         // TODO: automatically load nexus location from file instead
         final Location location;
         if (this.teamName.equals("Red")) {
-            location = new Location(BreakTheNexus.getInstance().getMapManager().getGameWorld(), 0.0, 29.0, 95.0);
+            location = new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), 0.0, 29.0, 95.0);
         } else if (this.teamName.equals("Blue")) {
-            location = new Location(BreakTheNexus.getInstance().getMapManager().getGameWorld(), 0.0, 29.0, -95.0);
+            location = new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), 0.0, 29.0, -95.0);
         } else {
             location = null;
         }
@@ -99,11 +99,11 @@ public class Team {
             nexus.getLocation().getBlock().setType(Material.BEDROCK);
 
             nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.EXPLOSION_HUGE, 0);
-            BreakTheNexus.getInstance().getMapManager().getGameWorld().playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
+            BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
             BreakTheNexus.getInstance().getServer().broadcastMessage(teamName + " has been destroyed!");
 
             spawnpoints.clear();
-            spawnpoints.add(BreakTheNexus.getInstance().getMapManager().getLobbyWorld().getSpawnLocation());
+            spawnpoints.add(BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld().getSpawnLocation());
 
             alive = false;
 
@@ -113,7 +113,7 @@ public class Team {
 
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.LARGE_SMOKE, 0);
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.CLOUD, 0);
-        BreakTheNexus.getInstance().getMapManager().getGameWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
+        BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
         BreakTheNexus.getInstance().getServer().broadcastMessage(attackerName + " attacked " + teamName + " nexus! (" + nexus.getHealth() + ")");
 
     }

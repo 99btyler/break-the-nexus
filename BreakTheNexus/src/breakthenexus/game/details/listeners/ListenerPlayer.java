@@ -32,7 +32,7 @@ public class ListenerPlayer implements Listener {
 
         player.teleport(placeToSpawn);
 
-        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapManager().getLobbyWorld()) {
+        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
 
             player.getInventory().clear();
             player.setHealth(20.0);
@@ -57,7 +57,7 @@ public class ListenerPlayer implements Listener {
 
         playerRespawnEvent.setRespawnLocation(placeToSpawn);
 
-        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getMapManager().getGameWorld()) {
+        if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getGamemapManager().getGameWorld()) {
 
             // For some reason, player is briefly null after PlayerRespawnEvent.
             // This seems to be a Bukkit thing. My workaround: wait 1 second
@@ -76,7 +76,7 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onFoodLevelChange(FoodLevelChangeEvent foodLevelChangeEvent) {
 
-        if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapManager().getLobbyWorld()) {
+        if (foodLevelChangeEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
             foodLevelChangeEvent.setCancelled(true);
         }
 
@@ -85,7 +85,7 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onEntityDamage(EntityDamageEvent entityDamageEvent) {
 
-        if (entityDamageEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getMapManager().getLobbyWorld()) {
+        if (entityDamageEvent.getEntity().getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
             entityDamageEvent.setCancelled(true);
         }
 
@@ -100,7 +100,7 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onBlockBreak(BlockBreakEvent blockBreakEvent) {
 
-        if (blockBreakEvent.getBlock().getWorld() == BreakTheNexus.getInstance().getMapManager().getLobbyWorld()) {
+        if (blockBreakEvent.getBlock().getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
             blockBreakEvent.setCancelled(true);
             return;
         }
@@ -168,7 +168,7 @@ public class ListenerPlayer implements Listener {
         if (itemStackMeta.getLore().contains("§6Soulbound")) {
 
             playerDropItemEvent.getItemDrop().remove();
-            BreakTheNexus.getInstance().getMapManager().getGameWorld().playSound(playerDropItemEvent.getPlayer().getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
+            BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(playerDropItemEvent.getPlayer().getLocation(), Sound.ITEM_BREAK, 1.0F, 1.5F);
 
         } else if (itemStackMeta.getLore().contains("§dSpecial")) {
 
