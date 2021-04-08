@@ -13,30 +13,28 @@ import java.util.Map;
 
 public class GamemapManager {
 
-    // Contains the original copies of the gamemaps
-    private final String worldsFolder = "plugins/BreakTheNexus/worlds/";
-
-    // Will contain clones of the gamemaps, which will be played on and deleted
-    private final String worldsCloneFolder = "plugins/BreakTheNexus/worlds CLONE/";
-
     private final Gamemap[] gamemaps;
+
+    private final String worldsFolder = "plugins/BreakTheNexus/worlds/";
+    private final String worldsCloneFolder = "plugins/BreakTheNexus/worlds CLONE/"; // These will be played on and deleted
 
     private final Map<String, Location> disconnectLocations = new HashMap<>();
 
     public GamemapManager(Gamemap lobby, Gamemap game) {
+
         gamemaps = new Gamemap[] {lobby, game};
+
         loadGamemaps();
+
     }
 
     private void loadGamemaps() {
 
         for (Gamemap gamemap : gamemaps) {
 
-            // The original gamemap's folder
             final File worldFolder = new File(worldsFolder + gamemap.getWorldFolderName());
-
-            // The clone gamemaps's folder (empty right now)
             final File worldCloneFolder = new File(worldsCloneFolder + gamemap.getWorldFolderName());
+
             try {
 
                 // Creating the clone
