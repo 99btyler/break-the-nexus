@@ -35,6 +35,11 @@ public class ListenerPlayer implements Listener {
         if (placeToSpawn.getWorld() == BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld()) {
 
             player.getInventory().clear();
+            player.getInventory().setBoots(null);
+            player.getInventory().setLeggings(null);
+            player.getInventory().setChestplate(null);
+            player.getInventory().setHelmet(null);
+
             player.setHealth(20.0);
             player.setFoodLevel(20);
 
