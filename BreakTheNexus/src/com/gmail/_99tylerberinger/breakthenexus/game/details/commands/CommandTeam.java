@@ -40,6 +40,11 @@ public class CommandTeam implements CommandExecutor {
                             break;
                         }
 
+                        if (BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName()) != null) {
+                            player.sendMessage("You're already on a team");
+                            break;
+                        }
+
                         for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
                             if (team.getName().equalsIgnoreCase(args[1])) {
 
