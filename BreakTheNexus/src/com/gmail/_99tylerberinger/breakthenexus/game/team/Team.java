@@ -13,29 +13,27 @@ public class Team {
 
     private final String name;
 
-    private boolean alive;
-
-    private final List<String> playerNames = new ArrayList<>();
-
+    private final List<String> players = new ArrayList<>();
     private final List<Location> spawnpoints = new ArrayList<>();
-
     private final Nexus nexus;
 
-    public Team(String name, ConfigurationSection locations) {
+    private boolean alive;
+
+    public Team(String name, ConfigurationSection teamData) {
 
         this.name = name;
 
-        alive = true;
-
-        final World gameWorld = BreakTheNexus.getInstance().getGamemapManager().getGameWorld();
-
-        for (int i = 0; i < 3; i++) {
-            final String[] locationsSpawnpoint = locations.getString(".spawnpoints." + name + "." + i).split(";");
-            spawnpoints.add(new Location(gameWorld, Double.parseDouble(locationsSpawnpoint[0]), Double.parseDouble(locationsSpawnpoint[1]), Double.parseDouble(locationsSpawnpoint[2]), Float.parseFloat(locationsSpawnpoint[3]), Float.parseFloat(locationsSpawnpoint[4])));
+        for (String key : teamData.getConfigurationSection(".spawnpoints").getKeys(false)) {
+            final String value = teamData.getString(".spawnpoints." + key);
+            final String[] cordData = value.split(",");
+            spawnpoints.add(new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), Double.parseDouble(cordData[0]), Double.parseDouble(cordData[1]), Double.parseDouble(cordData[2]), Float.parseFloat(cordData[3]), Float.parseFloat(cordData[4])));
         }
 
-        final String[] locationsNexus = locations.getString(".nexus." + name).split(";");
-        nexus = new Nexus(new Location(gameWorld, Double.parseDouble(locationsNexus[0]), Double.parseDouble(locationsNexus[1]), Double.parseDouble(locationsNexus[2])));
+        final String value = teamData.getString(".nexus");
+        final String[] cordData = value.split(",");
+        nexus = new Nexus(new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), Double.parseDouble(cordData[0]), Double.parseDouble(cordData[1]), Double.parseDouble(cordData[2])));
+
+        alive = true;
 
     }
 
@@ -43,19 +41,15 @@ public class Team {
         return name;
     }
 
-    public final boolean isAlive() {
-        return alive;
-    }
-
     public final boolean hasPlayer(String playerName) {
-        return playerNames.contains(playerName);
+        return players.contains(playerName);
     }
 
     public final void addPlayer(String playerName) {
 
-        if (!playerNames.contains(playerName)) {
+        if (!players.contains(playerName)) {
 
-            playerNames.add(playerName);
+            players.add(playerName);
             BreakTheNexus.getInstance().getKitManager().updateKitUsers(playerName, "Civilian");
 
             Bukkit.getPlayer(playerName).teleport(getRandomSpawnpoint());
@@ -80,7 +74,7 @@ public class Team {
             return;
         }
 
-        if (playerNames.contains(attackerName)) {
+        if (players.contains(attackerName)) {
             Bukkit.getPlayer(attackerName).sendMessage("Don't attack your own nexus");
             return;
         }
@@ -113,8 +107,12 @@ public class Team {
 
     }
 
+    public final boolean isAlive() {
+        return alive;
+    }
+
     public final String getInfo() {
-        return name.toUpperCase() + ": " + playerNames.size() + " players @ " + nexus.getHealth();
+        return name.toUpperCase() + ": " + players.size() + " players @ " + nexus.getHealth();
     }
 
 }

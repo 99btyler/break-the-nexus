@@ -17,7 +17,6 @@ import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
 import com.gmail._99tylerberinger.breakthenexus.game.team.TeamManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class BreakTheNexus extends JavaPlugin {
@@ -33,9 +32,7 @@ public class BreakTheNexus extends JavaPlugin {
     public void onEnable() {
 
         instance = this;
-
-        instance.getConfig().options().copyDefaults(true);
-        instance.saveConfig();
+        instance.saveDefaultConfig();
 
         gamemapManager = new GamemapManager(
                 new Gamemap[] {
@@ -45,11 +42,12 @@ public class BreakTheNexus extends JavaPlugin {
                 instance.getConfig().getConfigurationSection("Gamemap.protectedAreas.")
         );
 
-        final ConfigurationSection locations = instance.getConfig().getConfigurationSection("locations");
-        teamManager = new TeamManager(new Team[] {
-                new Team("Red", locations),
-                new Team("Blue", locations)
-        });
+        teamManager = new TeamManager(
+                new Team[] {
+                        new Team("Red", instance.getConfig().getConfigurationSection("Red.")),
+                        new Team("Blue", instance.getConfig().getConfigurationSection("Blue."))
+                }
+        );
 
         mineManager = new MineManager(new Mine[] {
                 new Mine(Material.IRON_ORE, 15),
