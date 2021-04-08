@@ -43,6 +43,10 @@ public class Team {
         return name;
     }
 
+    public final boolean isAlive() {
+        return alive;
+    }
+
     public final boolean hasPlayer(String playerName) {
         return playerNames.contains(playerName);
     }
@@ -95,6 +99,8 @@ public class Team {
             spawnpoints.add(BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld().getSpawnLocation());
 
             alive = false;
+
+            BreakTheNexus.getInstance().getTeamManager().announceRemainingTeams();
 
             return;
 
