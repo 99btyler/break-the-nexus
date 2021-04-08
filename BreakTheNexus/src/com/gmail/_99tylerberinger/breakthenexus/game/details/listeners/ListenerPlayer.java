@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -117,7 +118,6 @@ public class ListenerPlayer implements Listener {
             return;
         }
 
-        // Nexus
         for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
             if (team.getNexus().getLocation().equals(blockBreakEvent.getBlock().getLocation())) {
 
@@ -128,7 +128,6 @@ public class ListenerPlayer implements Listener {
             }
         }
 
-        // Mines
         for (Mine mine : BreakTheNexus.getInstance().getMineManager().getMines()) {
             if (mine.getMaterial() == blockBreakEvent.getBlock().getType()) {
 
@@ -137,6 +136,19 @@ public class ListenerPlayer implements Listener {
                 return;
 
             }
+        }
+
+        if (BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(blockBreakEvent.getBlock().getLocation())) {
+            blockBreakEvent.setCancelled(true);
+        }
+
+    }
+
+    @EventHandler
+    private void onBlockPlace(BlockPlaceEvent blockPlaceEvent) {
+
+        if (BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(blockPlaceEvent.getBlock().getLocation())) {
+            blockPlaceEvent.setCancelled(true);
         }
 
     }

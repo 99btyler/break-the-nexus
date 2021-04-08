@@ -34,9 +34,15 @@ public class BreakTheNexus extends JavaPlugin {
 
         instance = this;
 
+        instance.getConfig().options().copyDefaults(true);
+        instance.saveConfig();
+
         gamemapManager = new GamemapManager(
-                new Gamemap("The Lobby"),
-                new Gamemap("Roastal")
+                new Gamemap[] {
+                        new Gamemap("The Lobby"),
+                        new Gamemap("Roastal")
+                },
+                instance.getConfig().getConfigurationSection("Gamemap.protectedAreas.")
         );
 
         final ConfigurationSection locations = instance.getConfig().getConfigurationSection("locations");

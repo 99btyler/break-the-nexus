@@ -5,10 +5,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.configuration.ConfigurationSection;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GamemapManager {
@@ -19,12 +22,22 @@ public class GamemapManager {
     private final String worldsCloneFolder = "plugins/BreakTheNexus/worlds CLONE/"; // These will be played on and deleted
 
     private final Map<String, Location> disconnectLocations = new HashMap<>();
+    private final List<ProtectedArea> protectedAreas = new ArrayList<>();
 
-    public GamemapManager(Gamemap lobby, Gamemap game) {
+    public GamemapManager(Gamemap[] gamemaps, ConfigurationSection protectedAreasData) {
 
-        gamemaps = new Gamemap[] {lobby, game};
-
+        this.gamemaps = gamemaps;
         loadGamemaps();
+
+        for (String key : protectedAreasData.getKeys(false)) {
+
+            final String value = protectedAreasData.getString(key); // "minX,maxX ; minZ,maxZ"
+
+            final String[] xData = value.split(" ; ")[0].split(",");
+            final String[] zData = value.split(" ; ")[1].split(",");
+            protectedAreas.add(new ProtectedArea(Integer.parseInt(xData[0]), Integer.parseInt(xData[1]), Integer.parseInt(zData[0]), Integer.parseInt(zData[1])));
+
+        }
 
     }
 
@@ -87,6 +100,27 @@ public class GamemapManager {
 
     public final void saveDisconnectLocation(String playerName, Location location) {
         disconnectLocations.put(playerName, location);
+    }
+
+    public final boolean isInProtectedArea(Location location) {
+
+        final double x = location.getX();
+        final double z = location.getZ();
+
+        for (ProtectedArea protectedArea : protectedAreas) {
+
+            if (x >= protectedArea.getMinX() && x <= protectedArea.getMaxX()) {
+                if (z >= protectedArea.getMinZ() && z <= protectedArea.getMaxZ()) {
+
+                    return true;
+
+                }
+            }
+
+        }
+
+        return false;
+
     }
 
 }

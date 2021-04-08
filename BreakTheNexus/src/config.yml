@@ -1,3 +1,7 @@
+Gamemap:
+  protectedAreas:
+    0: "-11,11 ; 84,99"
+    1: "-11,11 ; -99,-84"
 locations:
   spawnpoints:
     Red:
