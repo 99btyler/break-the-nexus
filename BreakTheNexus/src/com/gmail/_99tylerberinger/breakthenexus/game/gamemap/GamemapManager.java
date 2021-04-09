@@ -29,14 +29,11 @@ public class GamemapManager {
         this.gamemaps = gamemaps;
         loadGamemaps();
 
-        for (String key : protectedAreasData.getKeys(false)) {
-
-            final String value = protectedAreasData.getString(key); // "minX,maxX ; minZ,maxZ"
-
-            final String[] xData = value.split(" ; ")[0].split(",");
-            final String[] zData = value.split(" ; ")[1].split(",");
+        for (String protectedAreasDataKey : protectedAreasData.getKeys(false)) {
+            final String protectedAreasDataValue = protectedAreasData.getString(protectedAreasDataKey);
+            final String[] xData = protectedAreasDataValue.split(" ; ")[0].split(",");
+            final String[] zData = protectedAreasDataValue.split(" ; ")[1].split(",");
             protectedAreas.add(new ProtectedArea(Integer.parseInt(xData[0]), Integer.parseInt(xData[1]), Integer.parseInt(zData[0]), Integer.parseInt(zData[1])));
-
         }
 
     }

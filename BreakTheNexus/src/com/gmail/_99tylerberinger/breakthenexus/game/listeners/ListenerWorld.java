@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.details.listeners;
+package com.gmail._99tylerberinger.breakthenexus.game.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

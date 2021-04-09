@@ -28,8 +28,8 @@ public class Miner extends Kit {
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, (20 * 15), 0));
 
-        player.getWorld().playEffect(player.getLocation().add(0, 2, 0), Effect.COLOURED_DUST, 0);
         player.sendMessage(ChatColor.LIGHT_PURPLE + "You now have Haste for 15 seconds!");
+        player.getWorld().playEffect(player.getLocation().add(0, 2, 0), Effect.COLOURED_DUST, 0);
 
     }
 

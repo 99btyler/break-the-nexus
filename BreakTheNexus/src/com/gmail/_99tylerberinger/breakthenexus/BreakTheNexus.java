@@ -1,18 +1,18 @@
 package com.gmail._99tylerberinger.breakthenexus;
 
-import com.gmail._99tylerberinger.breakthenexus.game.details.commands.CommandKit;
-import com.gmail._99tylerberinger.breakthenexus.game.details.commands.CommandTeam;
-import com.gmail._99tylerberinger.breakthenexus.game.details.listeners.ListenerPlayer;
-import com.gmail._99tylerberinger.breakthenexus.game.details.listeners.ListenerWorld;
+import com.gmail._99tylerberinger.breakthenexus.game.commands.CommandKit;
+import com.gmail._99tylerberinger.breakthenexus.game.commands.CommandTeam;
 import com.gmail._99tylerberinger.breakthenexus.game.gamemap.Gamemap;
 import com.gmail._99tylerberinger.breakthenexus.game.gamemap.GamemapManager;
+import com.gmail._99tylerberinger.breakthenexus.game.gamemap.mine.Mine;
+import com.gmail._99tylerberinger.breakthenexus.game.gamemap.mine.MineManager;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.Kit;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.KitManager;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Civilian;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Miner;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Warrior;
-import com.gmail._99tylerberinger.breakthenexus.game.mine.Mine;
-import com.gmail._99tylerberinger.breakthenexus.game.mine.MineManager;
+import com.gmail._99tylerberinger.breakthenexus.game.listeners.ListenerPlayer;
+import com.gmail._99tylerberinger.breakthenexus.game.listeners.ListenerWorld;
 import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
 import com.gmail._99tylerberinger.breakthenexus.game.team.TeamManager;
 import org.bukkit.Location;
@@ -49,19 +49,23 @@ public class BreakTheNexus extends JavaPlugin {
                 }
         );
 
-        mineManager = new MineManager(new Mine[] {
-                new Mine(Material.IRON_ORE, 15),
-                new Mine(Material.GOLD_ORE, 30),
-                new Mine(Material.COAL_ORE, Material.COAL, 5),
-                new Mine(Material.MELON_BLOCK, Material.MELON, 12, 5),
-                new Mine(Material.LOG, Material.WOOD, 4, 10)
-        });
+        mineManager = new MineManager(
+                new Mine[] {
+                        new Mine(Material.IRON_ORE, 15),
+                        new Mine(Material.GOLD_ORE, 30),
+                        new Mine(Material.COAL_ORE, Material.COAL, 5),
+                        new Mine(Material.MELON_BLOCK, Material.MELON, 12, 5),
+                        new Mine(Material.LOG, Material.WOOD, 4, 10)
+                }
+        );
 
-        kitManager = new KitManager(new Kit[] {
-                new Civilian(),
-                new Miner(),
-                new Warrior()
-        });
+        kitManager = new KitManager(
+                new Kit[] {
+                        new Civilian(),
+                        new Miner(),
+                        new Warrior()
+                }
+        );
 
         getCommand("kit").setExecutor(new CommandKit());
         getCommand("team").setExecutor(new CommandTeam());

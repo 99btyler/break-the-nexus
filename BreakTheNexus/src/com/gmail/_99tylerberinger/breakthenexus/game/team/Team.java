@@ -1,7 +1,6 @@
 package com.gmail._99tylerberinger.breakthenexus.game.team;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
-import com.gmail._99tylerberinger.breakthenexus.game.Nexus;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -23,14 +22,14 @@ public class Team {
 
         this.name = name;
 
-        for (String key : teamData.getConfigurationSection(".spawnpoints").getKeys(false)) {
-            final String value = teamData.getString(".spawnpoints." + key);
-            final String[] cordData = value.split(",");
+        for (String spawnpointsDataKey : teamData.getConfigurationSection(".spawnpoints").getKeys(false)) {
+            final String spawnpointsDataValue = teamData.getString(".spawnpoints." + spawnpointsDataKey);
+            final String[] cordData = spawnpointsDataValue.split(",");
             spawnpoints.add(new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), Double.parseDouble(cordData[0]), Double.parseDouble(cordData[1]), Double.parseDouble(cordData[2]), Float.parseFloat(cordData[3]), Float.parseFloat(cordData[4])));
         }
 
-        final String value = teamData.getString(".nexus");
-        final String[] cordData = value.split(",");
+        final String nexusDataValue = teamData.getString(".nexus");
+        final String[] cordData = nexusDataValue.split(",");
         nexus = new Nexus(new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), Double.parseDouble(cordData[0]), Double.parseDouble(cordData[1]), Double.parseDouble(cordData[2])));
 
         alive = true;
@@ -85,9 +84,9 @@ public class Team {
 
             nexus.getLocation().getBlock().setType(Material.BEDROCK);
 
+            BreakTheNexus.getInstance().getServer().broadcastMessage(name + " has been destroyed!");
             nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.EXPLOSION_HUGE, 0);
             BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(nexus.getLocation(), Sound.EXPLODE, 1.0F, 0.1F);
-            BreakTheNexus.getInstance().getServer().broadcastMessage(name + " has been destroyed!");
 
             spawnpoints.clear();
             spawnpoints.add(BreakTheNexus.getInstance().getGamemapManager().getLobbyWorld().getSpawnLocation());
@@ -100,10 +99,10 @@ public class Team {
 
         }
 
+        BreakTheNexus.getInstance().getServer().broadcastMessage(attackerName + " attacked " + name + " nexus! (" + nexus.getHealth() + ")");
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.LARGE_SMOKE, 0);
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.CLOUD, 0);
         BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
-        BreakTheNexus.getInstance().getServer().broadcastMessage(attackerName + " attacked " + name + " nexus! (" + nexus.getHealth() + ")");
 
     }
 

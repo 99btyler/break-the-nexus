@@ -28,8 +28,8 @@ public class Warrior extends Kit {
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (20 * 15), 0));
 
-        player.getWorld().playEffect(player.getLocation().add(0, 2, 0), Effect.VILLAGER_THUNDERCLOUD, 0);
         player.sendMessage(ChatColor.LIGHT_PURPLE + "You now have Speed for 15 seconds!");
+        player.getWorld().playEffect(player.getLocation().add(0, 2, 0), Effect.VILLAGER_THUNDERCLOUD, 0);
 
     }
 

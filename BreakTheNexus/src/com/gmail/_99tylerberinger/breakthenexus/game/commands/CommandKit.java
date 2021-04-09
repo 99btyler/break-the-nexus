@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.details.commands;
+package com.gmail._99tylerberinger.breakthenexus.game.commands;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.Kit;
