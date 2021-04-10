@@ -118,6 +118,30 @@ public class KitManager {
 
     }
 
+    public final void takeKitItemsFrom(String playerName) {
+
+        final Player player = Bukkit.getPlayer(playerName);
+
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (itemStack != null) {
+
+                final ItemMeta itemStackMeta = itemStack.getItemMeta();
+
+                if (!itemStackMeta.hasLore()) {
+                    continue;
+                }
+
+                if (itemStackMeta.getLore().contains("§6Soulbound") || itemStackMeta.getLore().contains("§dSpecial")) {
+
+                    player.getInventory().remove(itemStack);
+
+                }
+
+            }
+        }
+
+    }
+
     public final void handleDoSpecial(Player player) {
 
         if (cooldowns.get(player.getName())) {

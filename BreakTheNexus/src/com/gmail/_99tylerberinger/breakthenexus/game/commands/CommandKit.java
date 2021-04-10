@@ -2,6 +2,7 @@ package com.gmail._99tylerberinger.breakthenexus.game.commands;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
 import com.gmail._99tylerberinger.breakthenexus.game.kit.Kit;
+import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -52,11 +53,21 @@ public class CommandKit implements CommandExecutor {
                             break;
                         }
 
+                        if (!BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(player.getLocation())) {
+                            commandSender.sendMessage("You must be in a protected area");
+                            break;
+                        }
+
                         final boolean switched = BreakTheNexus.getInstance().getKitManager().updateKitUsers(player.getName(), args[1]);
 
                         if (switched) {
-                            player.sendMessage("Success!");
-                            player.setHealth(0);
+
+                            final Team team = BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName());
+
+                            player.teleport(team.getRandomSpawnpoint());
+                            BreakTheNexus.getInstance().getKitManager().takeKitItemsFrom(player.getName());
+                            BreakTheNexus.getInstance().getKitManager().giveKitItemsTo(player.getName());
+
                         }
 
                     }
