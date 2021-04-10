@@ -111,7 +111,21 @@ public class KitManager {
 
                 }
 
-                player.getInventory().setArmorContents(armorItems);
+                if (player.getInventory().getBoots() == null) {
+                    player.getInventory().setBoots(armorItems[0]);
+                }
+
+                if (player.getInventory().getLeggings() == null) {
+                    player.getInventory().setLeggings(armorItems[1]);
+                }
+
+                if (player.getInventory().getChestplate() == null) {
+                    player.getInventory().setChestplate(armorItems[2]);
+                }
+
+                if (player.getInventory().getHelmet() == null) {
+                    player.getInventory().setHelmet(armorItems[3]);
+                }
 
             }
         }
