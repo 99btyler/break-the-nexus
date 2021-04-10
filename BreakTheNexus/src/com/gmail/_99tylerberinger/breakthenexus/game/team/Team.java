@@ -1,6 +1,7 @@
 package com.gmail._99tylerberinger.breakthenexus.game.team;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
+import com.gmail._99tylerberinger.breakthenexus.game.gamemap.ProtectedArea;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -15,6 +16,7 @@ public class Team {
     private final List<String> players = new ArrayList<>();
     private final List<Location> spawnpoints = new ArrayList<>();
     private final Nexus nexus;
+    private final ProtectedArea protectedArea;
 
     private boolean alive;
 
@@ -31,6 +33,11 @@ public class Team {
         final String nexusDataValue = teamData.getString(".nexus");
         final String[] cordData = nexusDataValue.split(",");
         nexus = new Nexus(new Location(BreakTheNexus.getInstance().getGamemapManager().getGameWorld(), Double.parseDouble(cordData[0]), Double.parseDouble(cordData[1]), Double.parseDouble(cordData[2])));
+
+        final String protectedAreaDataValue = teamData.getString(".protectedArea");
+        final String[] xData = protectedAreaDataValue.split(" ; ")[0].split(",");
+        final String[] zData = protectedAreaDataValue.split(" ; ")[1].split(",");
+        protectedArea = new ProtectedArea(Integer.parseInt(xData[0]), Integer.parseInt(xData[1]), Integer.parseInt(zData[0]), Integer.parseInt(zData[1]));
 
         alive = true;
 
@@ -103,6 +110,23 @@ public class Team {
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.LARGE_SMOKE, 0);
         nexus.getLocation().getWorld().playEffect(nexus.getLocation(), Effect.CLOUD, 0);
         BreakTheNexus.getInstance().getGamemapManager().getGameWorld().playSound(nexus.getLocation(), Sound.ANVIL_LAND, 1.0F, 0.1F);
+
+    }
+
+    public final boolean protectedAreaContains(Location location) {
+
+        final double x = location.getX();
+        final double z = location.getZ();
+
+        if (x >= protectedArea.getMinX() && x <= protectedArea.getMaxX()) {
+            if (z >= protectedArea.getMinZ() && z <= protectedArea.getMaxZ()) {
+
+                return true;
+
+            }
+        }
+
+        return false;
 
     }
 

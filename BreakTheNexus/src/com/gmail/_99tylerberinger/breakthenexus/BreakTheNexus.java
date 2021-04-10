@@ -38,8 +38,7 @@ public class BreakTheNexus extends JavaPlugin {
                 new Gamemap[] {
                         new Gamemap("The Lobby"),
                         new Gamemap("Roastal")
-                },
-                instance.getConfig().getConfigurationSection("Gamemap.protectedAreas.")
+                }
         );
 
         teamManager = new TeamManager(

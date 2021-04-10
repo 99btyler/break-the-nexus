@@ -53,16 +53,16 @@ public class CommandKit implements CommandExecutor {
                             break;
                         }
 
-                        if (!BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(player.getLocation())) {
-                            commandSender.sendMessage("You must be in a protected area");
+                        final Team team = BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName());
+
+                        if (!team.protectedAreaContains(player.getLocation())) {
+                            commandSender.sendMessage("You must be in your team's protected area");
                             break;
                         }
 
                         final boolean switched = BreakTheNexus.getInstance().getKitManager().updateKitUsers(player.getName(), args[1]);
 
                         if (switched) {
-
-                            final Team team = BreakTheNexus.getInstance().getTeamManager().getTeamByPlayer(player.getName());
 
                             player.teleport(team.getRandomSpawnpoint());
                             BreakTheNexus.getInstance().getKitManager().takeKitItemsFrom(player.getName());

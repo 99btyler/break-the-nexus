@@ -138,8 +138,12 @@ public class ListenerPlayer implements Listener {
             }
         }
 
-        if (BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(blockBreakEvent.getBlock().getLocation())) {
-            blockBreakEvent.setCancelled(true);
+        for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
+            if (team.protectedAreaContains(blockBreakEvent.getBlock().getLocation())) {
+
+                blockBreakEvent.setCancelled(true);
+
+            }
         }
 
     }
@@ -147,8 +151,12 @@ public class ListenerPlayer implements Listener {
     @EventHandler
     private void onBlockPlace(BlockPlaceEvent blockPlaceEvent) {
 
-        if (BreakTheNexus.getInstance().getGamemapManager().isInProtectedArea(blockPlaceEvent.getBlock().getLocation())) {
-            blockPlaceEvent.setCancelled(true);
+        for (Team team : BreakTheNexus.getInstance().getTeamManager().getTeams()) {
+            if (team.protectedAreaContains(blockPlaceEvent.getBlock().getLocation())) {
+
+                blockPlaceEvent.setCancelled(true);
+
+            }
         }
 
     }
