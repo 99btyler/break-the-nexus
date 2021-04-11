@@ -14,6 +14,8 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -185,6 +187,25 @@ public class ListenerPlayer implements Listener {
         if (itemStackMeta.getLore().contains("§dSpecial")) {
             BreakTheNexus.getInstance().getKitManager().handleDoSpecial(playerInteractEvent.getPlayer());
         }
+
+    }
+
+    @EventHandler
+    private void onInventoryClick(InventoryClickEvent inventoryClickEvent) {
+
+        if (inventoryClickEvent.getInventory().getType() == InventoryType.CRAFTING) {
+            return;
+        }
+
+        final ItemMeta itemStackMeta = inventoryClickEvent.getCurrentItem().getItemMeta();
+
+        if (itemStackMeta == null || !itemStackMeta.hasLore()) {
+            return;
+        }
+
+       if (itemStackMeta.getLore().contains("§6Soulbound") || itemStackMeta.getLore().contains("§dSpecial")) {
+           inventoryClickEvent.setCancelled(true);
+       }
 
     }
 
