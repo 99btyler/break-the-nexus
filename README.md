@@ -1,5 +1,5 @@
 # break-the-nexus
-...
+![break-the-nexus gif](https://i.imgur.com/rkzdkAl.gif)
 
 # Getting Started
 Get this project set up locally
