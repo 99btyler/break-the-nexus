@@ -1,7 +1,9 @@
 .DS_Store
+
+out/
 .idea/
 .metadata/
 *.iml
-out/
+
 server/
 spigot-1.8.8.jar
