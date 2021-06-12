@@ -1,8 +1,7 @@
-package com.gmail._99tylerberinger.breakthenexus.game.kit;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.kit;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -67,10 +66,8 @@ public class KitManager {
                     }
 
                     final ItemMeta toolItemMeta = toolItem.getItemMeta();
-
                     toolItemMeta.setDisplayName("Soulbound Tool");
                     toolItemMeta.setLore(Arrays.asList("§6Soulbound"));
-
                     toolItem.setItemMeta(toolItemMeta);
 
                     player.getInventory().addItem(toolItem);
@@ -81,10 +78,8 @@ public class KitManager {
                 final ItemStack specialItem = new ItemStack(kit.getSpecialItemMaterial());
 
                 final ItemMeta specialItemMeta = specialItem.getItemMeta();
-
                 specialItemMeta.setDisplayName("Special Item");
                 specialItemMeta.setLore(Arrays.asList("§dSpecial"));
-
                 specialItem.setItemMeta(specialItemMeta);
 
                 player.getInventory().addItem(specialItem);
@@ -100,10 +95,7 @@ public class KitManager {
                 for (ItemStack armorItem : armorItems) {
 
                     final ItemMeta armorItemMeta = armorItem.getItemMeta();
-
-                    final Color color = BreakTheNexus.getInstance().getTeamManager().getTeamColorByPlayer(player.getName());
-                    ((LeatherArmorMeta)armorItemMeta).setColor(color);
-
+                    ((LeatherArmorMeta)armorItemMeta).setColor(BreakTheNexus.getInstance().getTeamManager().getTeamColorByPlayer(player.getName()));
                     armorItemMeta.setDisplayName("Soulbound Armor");
                     armorItemMeta.setLore(Arrays.asList("§6Soulbound"));
 
@@ -114,15 +106,12 @@ public class KitManager {
                 if (player.getInventory().getBoots() == null) {
                     player.getInventory().setBoots(armorItems[0]);
                 }
-
                 if (player.getInventory().getLeggings() == null) {
                     player.getInventory().setLeggings(armorItems[1]);
                 }
-
                 if (player.getInventory().getChestplate() == null) {
                     player.getInventory().setChestplate(armorItems[2]);
                 }
-
                 if (player.getInventory().getHelmet() == null) {
                     player.getInventory().setHelmet(armorItems[3]);
                 }
@@ -141,7 +130,7 @@ public class KitManager {
 
                 final ItemMeta itemStackMeta = itemStack.getItemMeta();
 
-                if (!itemStackMeta.hasLore()) {
+                if (itemStackMeta == null || !itemStackMeta.hasLore()) {
                     continue;
                 }
 

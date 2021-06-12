@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.gamemap;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.gamemap;
 
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
@@ -13,16 +13,16 @@ import java.util.Map;
 
 public class GamemapManager {
 
-    private final Gamemap[] gamemaps;
-
     private final String worldsFolder = "plugins/BreakTheNexus/worlds/";
     private final String worldsCloneFolder = "plugins/BreakTheNexus/worlds CLONE/"; // These will be played on and deleted
 
+    private final Gamemap[] gamemaps; // Assumes 0 will always be the lobby, 1 will always be the game
     private final Map<String, Location> disconnectLocations = new HashMap<>();
 
     public GamemapManager(Gamemap[] gamemaps) {
 
         this.gamemaps = gamemaps;
+
         loadGamemaps();
 
     }
@@ -36,15 +36,15 @@ public class GamemapManager {
 
             try {
 
-                // Creating the clone
+                // Create the clone
                 FileUtils.copyDirectory(worldFolder, worldCloneFolder);
-
-                // Loading the clone
-                Bukkit.getServer().createWorld(new WorldCreator(worldCloneFolder.getPath()));
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Load the clone
+            Bukkit.getServer().createWorld(new WorldCreator(worldCloneFolder.getPath()));
 
         }
 

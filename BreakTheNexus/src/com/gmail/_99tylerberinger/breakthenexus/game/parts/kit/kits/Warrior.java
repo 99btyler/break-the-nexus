@@ -1,6 +1,6 @@
-package com.gmail._99tylerberinger.breakthenexus.game.kit.kits;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.kit.kits;
 
-import com.gmail._99tylerberinger.breakthenexus.game.kit.Kit;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.Kit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Material;
@@ -26,7 +26,7 @@ public class Warrior extends Kit {
     @Override
     public void doSpecial(Player player) {
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (20 * 15), 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, (20 * 15), 0)); // 20 ticks = 1 second
 
         player.sendMessage(ChatColor.LIGHT_PURPLE + "You now have Speed for 15 seconds!");
         player.getWorld().playEffect(player.getLocation().add(0, 2, 0), Effect.VILLAGER_THUNDERCLOUD, 0);

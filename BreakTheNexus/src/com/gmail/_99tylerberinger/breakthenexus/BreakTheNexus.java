@@ -2,19 +2,19 @@ package com.gmail._99tylerberinger.breakthenexus;
 
 import com.gmail._99tylerberinger.breakthenexus.game.commands.CommandKit;
 import com.gmail._99tylerberinger.breakthenexus.game.commands.CommandTeam;
-import com.gmail._99tylerberinger.breakthenexus.game.gamemap.Gamemap;
-import com.gmail._99tylerberinger.breakthenexus.game.gamemap.GamemapManager;
-import com.gmail._99tylerberinger.breakthenexus.game.gamemap.mine.Mine;
-import com.gmail._99tylerberinger.breakthenexus.game.gamemap.mine.MineManager;
-import com.gmail._99tylerberinger.breakthenexus.game.kit.Kit;
-import com.gmail._99tylerberinger.breakthenexus.game.kit.KitManager;
-import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Civilian;
-import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Miner;
-import com.gmail._99tylerberinger.breakthenexus.game.kit.kits.Warrior;
 import com.gmail._99tylerberinger.breakthenexus.game.listeners.ListenerPlayer;
 import com.gmail._99tylerberinger.breakthenexus.game.listeners.ListenerWorld;
-import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
-import com.gmail._99tylerberinger.breakthenexus.game.team.TeamManager;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.gamemap.Gamemap;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.gamemap.GamemapManager;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.Kit;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.KitManager;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.kits.Civilian;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.kits.Miner;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.kit.kits.Warrior;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.mine.Mine;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.mine.MineManager;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.team.Team;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.team.TeamManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,10 +41,11 @@ public class BreakTheNexus extends JavaPlugin {
                 }
         );
 
-        teamManager = new TeamManager(
-                new Team[] {
-                        new Team("Red", instance.getConfig().getConfigurationSection("Red.")),
-                        new Team("Blue", instance.getConfig().getConfigurationSection("Blue."))
+        kitManager = new KitManager(
+                new Kit[] {
+                        new Civilian(),
+                        new Miner(),
+                        new Warrior()
                 }
         );
 
@@ -58,11 +59,10 @@ public class BreakTheNexus extends JavaPlugin {
                 }
         );
 
-        kitManager = new KitManager(
-                new Kit[] {
-                        new Civilian(),
-                        new Miner(),
-                        new Warrior()
+        teamManager = new TeamManager(
+                new Team[] {
+                        new Team("Red", instance.getConfig().getConfigurationSection("Red.")),
+                        new Team("Blue", instance.getConfig().getConfigurationSection("Blue."))
                 }
         );
 

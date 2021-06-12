@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.kit;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.kit;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -11,8 +11,10 @@ public abstract class Kit {
     private final Material specialItemMaterial;
 
     public Kit(Material[] toolItemMaterials, Material specialItemMaterial) {
+
         this.toolItemMaterials = toolItemMaterials;
         this.specialItemMaterial = specialItemMaterial;
+
     }
 
     public final String getName() {

@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.gamemap;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.gamemap;
 
 public class Gamemap {
 

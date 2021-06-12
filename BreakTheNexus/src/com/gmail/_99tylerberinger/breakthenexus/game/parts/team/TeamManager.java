@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.team;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.team;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
 import org.bukkit.Color;
@@ -11,7 +11,9 @@ public class TeamManager {
     private final Team[] teams;
 
     public TeamManager(Team[] teams) {
+
         this.teams = teams;
+
     }
 
     public final Team[] getTeams() {

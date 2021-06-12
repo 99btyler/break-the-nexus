@@ -1,8 +1,8 @@
 package com.gmail._99tylerberinger.breakthenexus.game.listeners;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
-import com.gmail._99tylerberinger.breakthenexus.game.gamemap.mine.Mine;
-import com.gmail._99tylerberinger.breakthenexus.game.team.Team;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.mine.Mine;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.team.Team;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -56,6 +56,7 @@ public class ListenerPlayer implements Listener {
         playerQuitEvent.setQuitMessage(null);
 
         final Player player = playerQuitEvent.getPlayer();
+
         BreakTheNexus.getInstance().getGamemapManager().saveDisconnectLocation(player.getName(), player.getLocation());
 
     }
@@ -76,7 +77,9 @@ public class ListenerPlayer implements Listener {
             breakTheNexus.getServer().getScheduler().runTaskLater(breakTheNexus, new Runnable() {
                 @Override
                 public void run() {
+
                     breakTheNexus.getKitManager().giveKitItemsTo(player.getName());
+
                 }
             }, 20 * 1); // 20 ticks = 1 second
 
@@ -208,7 +211,7 @@ public class ListenerPlayer implements Listener {
 
         final ItemMeta itemStackMeta = playerDropItemEvent.getItemDrop().getItemStack().getItemMeta();
 
-        if (!itemStackMeta.hasLore()) {
+        if (itemStackMeta == null || !itemStackMeta.hasLore()) {
             return;
         }
 
@@ -234,7 +237,7 @@ public class ListenerPlayer implements Listener {
 
             final ItemMeta dropMeta = drop.getItemMeta();
 
-            if (!dropMeta.hasLore()) {
+            if (dropMeta == null || !dropMeta.hasLore()) {
                 continue;
             }
 
