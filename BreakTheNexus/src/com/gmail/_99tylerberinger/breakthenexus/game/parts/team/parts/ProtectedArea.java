@@ -1,4 +1,4 @@
-package com.gmail._99tylerberinger.breakthenexus.game.parts.team.items;
+package com.gmail._99tylerberinger.breakthenexus.game.parts.team.parts;
 
 public class ProtectedArea {
 

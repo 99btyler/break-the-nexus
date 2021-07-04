@@ -1,8 +1,8 @@
 package com.gmail._99tylerberinger.breakthenexus.game.parts.team;
 
 import com.gmail._99tylerberinger.breakthenexus.BreakTheNexus;
-import com.gmail._99tylerberinger.breakthenexus.game.parts.team.items.Nexus;
-import com.gmail._99tylerberinger.breakthenexus.game.parts.team.items.ProtectedArea;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.team.parts.Nexus;
+import com.gmail._99tylerberinger.breakthenexus.game.parts.team.parts.ProtectedArea;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 
